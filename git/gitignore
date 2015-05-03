@@ -1,0 +1,24 @@
+*.orig
+
+# Local configs
+*.local
+
+# Binary gettext files
+*.po
+
+# vim
+*.swp
+*.swo
+.swo
+*.swn
+.swn
+*.sw?
+*~
+
+# mac stuff
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes

@@ -1,0 +1,20 @@
+[include]
+    path = ~/.gitconfig.local
+[core]
+    editor = vim
+    excludefile = ~/.gitignore
+    excludesfile = ~/.gitignore
+[merge]
+    tool = vimdiff
+[filter "media"]
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
+[alias]
+    out = log --pretty=oneline --abbrev-commit --graph @{u}..
+    in = !git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
+    ci = commit
+    st = status
+    co = checkout
+    branches = branch --all -v
+[push]
+    default = simple
