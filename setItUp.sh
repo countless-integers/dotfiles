@@ -21,7 +21,6 @@ $HOME/dotfiles/git/gitignore        $HOME/.gitignore
 $HOME/dotfiles/mc                   $HOME/.config/mc 
 $HOME/dotfiles/screen/screenrc      $HOME/.screenrc
 $HOME/dotfiles/vim/vimrc            $HOME/.vimrc
-$HOME/dotfiles/vim/bogey            $HOME/bogey
 DOTFILE_TO_LINK_DESTINATION_MAPPING
 
 echo -e ...everything in its place."\n"
