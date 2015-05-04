@@ -1,0 +1,176 @@
+# vim: foldmethod=marker foldlevel=0
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+### Enviroment {{{1
+if [ -f ~/dotfiles/bash/env ]; then
+    . ~/dotfiles/bash/env
+fi
+
+export PATH=$PATH:~/bin:~/.gem/ruby/2.0.0/bin:vendor/bin
+export EDITOR=vim
+
+### local stuff source {{{1
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
+
+### Bash completion {{{1
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    # . /etc/bash_completion
+    . /etc/bash_completion.d/*
+fi
+
+### Git autocompletion {{{1
+if [ -f ~/dotfiles/bash/git-completion.bash ]; then
+    . ~/dotfiles/bash/git-completion.bash
+fi
+
+### Prompt {{{1
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+
+force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+    else
+    color_prompt=
+    fi
+fi
+
+unset color_prompt force_color_prompt
+
+setup_prompt() {
+    if [ -z $promptColour ]; then
+        promptColour=$txtgrn
+    fi
+
+    hg_branch() {
+        hg branch 2> /dev/null | \
+            awk '{ printf "("$1")" }'
+        hg bookmarks 2> /dev/null | \
+            awk '/\*/ { printf "at " $2 }'
+    }
+
+    parse_hg_branch() {
+        ref=$(hg branch 2> /dev/null) || return
+        modified=$(test `hg status -mar | wc -l` -le 0 || echo "\e[0;31m+")
+        echo -e "\t$modified[hg:"${ref#refs/heads/}"]"
+    }
+
+    parse_git_branch() {
+        ref=$(git symbolic-ref --short HEAD 2> /dev/null) || return
+        modified=$(test `git status -s | wc -l` -le 0 || echo "\e[0;31m+")
+        echo -e "\t$modified[git:"${ref}"]"
+    }
+
+    print_before_the_prompt () {  
+        jobcount=`jobs | wc -l`
+        bgjobs=""
+        if [ $jobcount -eq 1 ]; then
+            bgjobs=" (${jobcount} job running)"
+        elif [ $jobcount -gt 1 ]; then
+            bgjobs=" (${jobcount} jobs running)"
+        fi
+        printf "\n${promptColour}·%s···%s@%s::%s···%s%s${txtrst}\n" \
+            "`date +%H:%M:%S`" \
+            "$USER" \
+            "`hostname`" \
+            "$PWD" \
+            "$(parse_hg_branch)""$(parse_git_branch)" \
+            "$bgjobs"
+    } 
+
+    PROMPT_COMMAND=print_before_the_prompt
+    PS1="·\#· \[$promptColour\]→ \[$txtrst\]"
+}
+
+setup_prompt
+
+
+### History {{{1
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+
+# timestamps for history
+HISTTIMEFORMAT='%F $T'
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+### misc {{{1
+if [ -x /usr/bin/fortune -a -x /usr/bin/cowsay ]; then
+    fortune -a | fmt -80 -s | cowsay -$(shuf -n 1 -e b d g p s t w y) -f $(shuf -n 1 -e $(cowsay -l | tail -n +2)) -n
+fi
+
+### Tmux helpers {{{1
+# for tmux: export 256color
+[ -n "$TMUX" ] && export TERM=screen-256color
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+### mac specific {{{1
+if [ $(uname) == 'Darwin' ]; then 
+    if [ -e ~/.ssh/config ]; then 
+        function _ssh_completion() {
+            perl -ne 'print "$1 " if /^Host (.+)$/' ~/.ssh/config
+        }
+        complete -W "$(_ssh_completion)" ssh
+    fi
+    export PYTHONPATH=$PYTHONPATH:/usr//local/lib/python2.7/site-packages:/usr//local/lib/python3.4/site-packages
+fi
+
+### aliases {{{1
+alias motd='fortune -a | fmt -80 -s | cowsay -$(shuf -n 1 -e b d g p s t w y) -f $(shuf -n 1 -e $(cowsay -l | tail -n +2)) -n'
+alias ..='cd ..'
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    #test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+    alias tree='tree -C '
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias h="history"
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+if [ "$(uname)" == 'Darwin' ]; then 
+    alias alert='terminal-notifier -message "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+fi
