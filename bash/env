@@ -17,6 +17,7 @@ export LC_MEASUREMENT=pl_PL.UTF-8
 export LC_IDENTIFICATION=pl_PL.UTF-8
 # LC_ALL=
 
+# http://www.shellhacks.com/en/Bash-Colors
 # color variables
 txtblk='\e[0;30m' # Black - Regular
 txtred='\e[0;31m' # Red
@@ -26,6 +27,9 @@ txtblu='\e[0;34m' # Blue
 txtpur='\e[0;35m' # Purple
 txtcyn='\e[0;36m' # Cyan
 txtwht='\e[0;37m' # White
+
+txtorg='\e[38;5;214m'
+
 # bold
 bldblk='\e[1;30m' # Black - Bold
 bldred='\e[1;31m' # Red
