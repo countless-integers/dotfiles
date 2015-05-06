@@ -1,0 +1,42 @@
+%include ~/.hgrc.local
+
+[ui]
+ignore = ~/.hgignore
+merge = vimdiff
+verbose = True
+
+[merge-tools]
+vimdiff.executable = vim
+vimdiff.args = -d $base $local $output $other +close +close
+
+[extensions]
+hgext.graphlog =
+hgext.keyword =
+color =
+highlight =
+keyword =
+hgext.extdiff =
+rebase =
+mq = 
+purge = 
+
+[alias]
+diffgrep = !$HG diff | grep -iE --color "$@"
+llog = log --limit 10
+annotate = annotate -udv
+
+[keywordmaps]
+#Id = {file|basename},v {node|short} {date|utcdate} {author|user}
+
+[keyword]
+**.tpl=
+**.php=
+**.css=
+**.js=
+
+[extdiff]
+cmd.vimdiff = vim
+opts.vimdiff = -f '+next' '+execute "DirDiff" argv(0) argv(1)'
+
+[hooks]
+

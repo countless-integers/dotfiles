@@ -146,6 +146,17 @@ if [ $(uname) == 'Darwin' ]; then
     export PYTHONPATH=$PYTHONPATH:/usr//local/lib/python2.7/site-packages:/usr//local/lib/python3.4/site-packages
 fi
 
+### xdebug {{{1
+#export XDEBUG_CONFIG="idekey=xdebug"
+export XDEBUG_CONFIG='remote_host=127.0.0.1 idekey=xdebug remote_port=9091'
+
+# XDebug
+#if [ "$TERM" != 'screen' ] && [ "$TERM" != 'screen-256color' ] ; then
+    #IP=$(last -n1 `whoami` | head -n1 | sed -e 's/.* \([0-9.]\{7,15\}\) .*/\1/')
+    #perl -i -pe "s/php_value xdebug\.remote_host .*/php_value xdebug.remote_host ${IP}/" ~/.htaccess
+    #export XDEBUG_CONFIG="remote_host=${IP} idekey=netbeans-xdebug"
+#fi 
+
 ### aliases {{{1
 alias motd='fortune -a | fmt -80 -s | cowsay -$(shuf -n 1 -e b d g p s t w y) -f $(shuf -n 1 -e $(cowsay -l | tail -n +2)) -n'
 alias ..='cd ..'

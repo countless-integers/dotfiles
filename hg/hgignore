@@ -1,0 +1,35 @@
+syntax: regexp
+#vim
+\.sv[npo]$
+\.project
+\.geanyprj$
+szablony\/compiled\/.*
+szablony_c\/.*
+./cache/
+log/
+
+# eclipse
+.settings 
+.project 
+.externalToolBuilders 
+.buildpath 
+
+# netbeans
+nbproject/* 
+# phpstorm
+\.idea 
+
+\.DS_Store
+\.orig$
+Thumbs\.db
+^trunk\/tags$
+^.*\/tags$
+^.*\/local.php$
+^.*\.class$
+
+syntax: glob
+*~
+*tags #ctags
+*.git/
+*.svn/
+.gitignore
