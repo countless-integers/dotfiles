@@ -27,4 +27,10 @@ $HOME/dotfiles/vim/vimrc            $HOME/.vimrc
 DOTFILE_TO_LINK_DESTINATION_MAPPING
 
 echo -e ...everything in its place."\n"
+
+if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
+    echo -e installing Vundle for Vim."\n"
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+
 echo "To find backups use: find $HOME -iname '*.$backupsuffix'"
