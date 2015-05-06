@@ -20,6 +20,7 @@ $HOME/dotfiles/bash/bashrc          $HOME/.bashrc
 $HOME/dotfiles/git/gitconfig        $HOME/.gitconfig 
 $HOME/dotfiles/git/gitignore        $HOME/.gitignore 
 $HOME/dotfiles/mc                   $HOME/.config/mc 
+$HOME/dotfiles/mc/skins             $HOME/.local/mc/skins 
 $HOME/dotfiles/screen/screenrc      $HOME/.screenrc
 $HOME/dotfiles/tmux/tmux.conf       $HOME/.tmux.conf
 $HOME/dotfiles/vim/vimrc            $HOME/.vimrc

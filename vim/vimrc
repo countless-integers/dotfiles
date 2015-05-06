@@ -4,7 +4,7 @@ set modeline                  " so it'll read the next line
 set nocompatible              " be iMproved
 filetype off                  " required!
 
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -546,7 +546,8 @@ let g:vdebug_keymap = {
 \}
 
 let g:vdebug_options= {
-\    "break_on_open": 0
+\    "break_on_open": 0,
+\    "port": 9091
 \}
 
 
