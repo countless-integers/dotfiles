@@ -100,8 +100,13 @@ Plugin 'tpope/vim-markdown'
 " add .gitignore rules to wildignore
 Plugin 'vim-scripts/gitignore'
 
+" rough color previews for css
+Plugin 'gorodinskiy/vim-coloresque'
+
 " ================[[ Syntax Plugins ]] ============== {{{2 
 Plugin 'beyondwords/vim-twig'
+Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
+Plugin 'cakebaker/scss-syntax.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -319,7 +324,25 @@ command! HgBlame call s:ExecuteInShell('hg blame -ucdq %', '<bang>')
 
 
 function! s:ExpandConstructor()
-  normal /__construct(f(lyi(/{op^kb^V:s/,/\nkbkb/gvi{<vi{:s/$kb\v\$(\w+)/\$this->\\kb1 = \$\1;/gvi{=/__construct(f(lyi(/class/\v^class/{op^V:s/,//gV?{jkb</$kb\$V}k:s/\v\$(\w+)/protected \$\1 = null;/gV?{=kb=
+  normal /__construct(
+f(lyi(/{
+op^kb^V:s/,/\nkbkb
+
+/g
+vi{<vi{:s/$kb\v\$(\w+)/\$this->\\kb1 = \$\1;/g
+vi{=/__construct(
+f(lyi(/class
+/\v^class
+/{
+o
+p^V:s/,/
+
+/g
+V?{jkb
+</$kb\$
+V}k:s/\v\$(\w+)/protected \$\1 = null;/g
+V?{=kb
+=
 endfunction
 command! ExpandConstructorParams call s:ExpandConstructor()
 
