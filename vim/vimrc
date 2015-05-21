@@ -35,6 +35,7 @@ Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'ack.vim'
+Plugin 'rking/ag.vim'
 
 " more actions for visual selection
 Plugin 'gavinbeatty/dragvisuals.vim' 
@@ -381,6 +382,8 @@ nmap [Q :qfirst<CR>
 nnoremap <silent> <leader>w :call argwrap#toggle()<CR>
 nnoremap <silent> <leader>r :syntax sync fromstart<CR>
 nmap <silent> <leader>n :set rnu!<CR>
+
+nnoremap <silent> <leader>p :set paste!<CR>
 
 "=====================[ encodings and internationalization ]===================== {{{1
 set fileencodings=ucs-bom,utf-8,default,latin2
