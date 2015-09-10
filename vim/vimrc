@@ -27,25 +27,21 @@ Plugin 'godlygeek/tabular'
 
 " improved behaviour for <C-a> / <C-x>
 Plugin 'tpope/vim-speeddating' 
+
+" colorscheme bundle
 Plugin 'flazz/vim-colorschemes'
-"Plugin 'gregsexton/MatchTag'
-"Plugin 'edsono/vim-matchit'
+
 Plugin 'vim-scripts/loremipsum'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
-Plugin 'ack.vim'
 
 " more actions for visual selection
 Plugin 'gavinbeatty/dragvisuals.vim' 
-Plugin 'vim-scripts/DirDiff.vim'
 
 " improved tabs behaviour (renaming)
 Plugin 'gcmt/taboo.vim' 
 Plugin 'joonty/vdebug.git'
-"Plugin 'vim-scripts/PDV--phpDocumentor-for-Vim'
-" enhanced php support
-Plugin 'spf13/PIV'
 Plugin 'xolox/vim-misc'
 
 " smart selection of the closest text object
@@ -53,12 +49,14 @@ Plugin 'gcmt/wildfire.vim'
 
 " automatic ctags generation
 Plugin 'xolox/vim-easytags' 
-"Plugin 'chilicuil/conque'
 
+" version control
 Plugin 'ludovicchabant/vim-lawrencium'
 Plugin 'tpope/vim-fugitive'
 " graphic git repo browser
 Plugin 'gregsexton/gitv'
+Plugin 'vim-scripts/DirDiff.vim'
+
 Plugin 'bling/vim-airline'
 
 Plugin 'Raimondi/delimitMate'
@@ -67,10 +65,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
 
 " js syntax enhencment vim > 7.4
-" Plugin 'pangloss/vim-javascript'
-
-" not so usefull after all; add -> ab zimhead
-Plugin 'vim-scripts/zim-syntax'
+Plugin 'pangloss/vim-javascript'
 
 " enables . cmd for selected plugins (e.g., surround)
 Plugin 'tpope/vim-repeat'
@@ -80,6 +75,9 @@ Plugin 'mattn/emmet-vim'
 " almost like sublimes feature
 Plugin 'terryma/vim-multiple-cursors'
 
+" extra brace mappings
+Plugin 'tpope/vim-unimpaired'
+
 Plugin 'reedes/vim-thematic'
 
 " marking changed lines from VC
@@ -88,7 +86,7 @@ Plugin 'mhinz/vim-signify'
 " argument (un-)wrapping
 Plugin 'FooSoft/vim-argwrap'
 
-" <c-o> to "window only", <c-o> again to undo
+" <c-o> to window only, <c-o> again to undo
 Plugin 'vim-scripts/ZoomWin'
 
 " fast movement \e
@@ -98,15 +96,30 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-markdown'
 
 " add .gitignore rules to wildignore
-Plugin 'vim-scripts/gitignore'
+"Plugin 'vim-scripts/gitignore'
 
 " rough color previews for css
 Plugin 'gorodinskiy/vim-coloresque'
 
+" argo for quickfix window
+Plugin 'peeja/vim-cdo'
+
+" searchers
+Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
+
+" enhanced php support
+Plugin 'spf13/PIV'
+Plugin 'klen/python-mode'
+
+" distraction free writing
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
+
 " ================[[ Syntax Plugins ]] ============== {{{2 
 Plugin 'beyondwords/vim-twig'
-Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
 Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'othree/html5.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -152,13 +165,25 @@ let g:thematic#themes = {
 \                'background': 'dark',
 \                'airline-theme': 'badwolf',
 \               },
+\ 'codeschool': {'colorscheme': 'codeschool',
+\                'laststatus': 2,
+\                'ruler': 1,
+\                'airline-theme': 'luna',
+\                'background': 'dark',
+\               },
 \ 'pencil_dark': {'colorscheme': 'pencil',
 \                 'background': 'dark',
 \                 'airline-theme': 'badwolf',
 \                 'ruler': 1,
-\                }
+\                },
+\ 'badwolf': {'colorscheme': 'badwolf',
+\             'background': 'dark',
+\             'airline-theme': 'badwolf',
+\             'ruler': 1,
+\            },
 \ }
-let g:thematic#theme_name = 'jellybeans'
+"let g:thematic#theme_name = 'jellybeans'
+let g:thematic#theme_name = 'badwolf'
 
 "=====================[ ListChars and whitespace visibility ]===================== {{{1
 " set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
@@ -210,7 +235,7 @@ set autoindent
 set smarttab
 set expandtab
 set backspace=2
-
+set textwidth=120
 set foldenable
 set foldmethod=syntax
 let php_folding=1
@@ -626,5 +651,26 @@ let g:easytags_on_cursorhold=0
 let g:easytags_auto_highlight = 0
 let g:easytags_auto_update = 0
 
+"=====================[ Goyo ]========================= {{{1
+function! s:goyo_enter()
+  silent !tmux set status off
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  Limelight
+  " ...
+endfunction
+
+function! s:goyo_leave()
+  silent !tmux set status on
+  set showmode
+  set showcmd
+  set scrolloff=5
+  Limelight!
+  " ...
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 "=====================[ EOF ]===================== {{{1
 " vim: foldmethod=marker foldcolumn=2 foldlevel=0
