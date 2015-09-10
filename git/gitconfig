@@ -8,7 +8,9 @@
 [merge]
     tool = vimdiff
 [diff]
-	tool = vimdiff
+    tool = default-difftool
+[difftool "default-difftool"]
+    cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax off'
 [filter "media"]
     clean = git-media-clean %f
     smudge = git-media-smudge %f
@@ -28,7 +30,7 @@
 [push]
     default = simple
 [color]
-  ui = true
-  decorate = short
+    ui = true
+    decorate = short
 [help]
-  autocorrect = 1
+    autocorrect = 1
