@@ -241,7 +241,7 @@ set foldmethod=syntax
 let php_folding=1
 
 " indents for differrent filetypes
-au FileType html,vim,tpl,smarty,css setl tabstop=2 shiftwidth=2
+au FileType html,vim,tpl,smarty,css,sass,scss setl tabstop=2 shiftwidth=2
 "au FileType html,tpl,smarty setl omnifunc=htmlcomplete#CompleteTags
 au FileType php,javascript setl tabstop=4 ai cindent si shiftwidth=4
 au FileType txt setl paste
@@ -456,6 +456,24 @@ autocmd BufReadPost *
 "set laststatus=2 " Always show the statusline
 "set cmdheight=1
 
+"=====================[ Grep engine ]==================== {{{1
+" Super-experimental
+" Change search command for ctrl to something faster?
+if executable('ag')
+  " becauses ag is supposed to be fast enough to skip the cache altogether
+  "let g:ctrlp_use_caching = 0
+  set grepprg=ag\ --nogroup\ --nocolor
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+elseif executable('ack')
+  let g:ctrlp_user_command = 'ack -g --nocolor " %s'
+else
+  "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard'
+  "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co', 'find %s -type f'
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+  \ }
+endif
+
 "=====================[ CtrlP ]===================== {{{1
 "let g:ctrlp_working_path_mode = 'r'
 "'c' - the directory of the current file.
@@ -477,27 +495,11 @@ let g:ctrlp_extensions = ['dir', 'line']
 " given substitute string. Won't be used if ctrlp_user_command is set
 " \ 'dir':  '\v[\/]\.(git|hg|svn|nbproject)$',
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v(\.(git|hg|svn|nbproject)|(szablony_c|combined))$',
-    \ 'file': '\v\.(exe|swp|\~|dll|jpg|gif|png|orig|class)$',
+    \ 'dir':  '\v(\.(git|hg|svn|nbproject|sass-cache)|(szablony_c|combined))$',
+    \ 'file': '\v\.(exe|swp|\~|dll|jpg|gif|png|orig|class|lock)$',
 \ }
 "let g:ctrlp_clear_cache_on_exit=1
 "let g:ctrlp_show_hidden = 0
-
-" Super-experimental
-" Change search command for ctrl to something faster?
-if executable('ag')
-  " becauses ag is supposed to be fast enough to skip the cache altogether
-  let g:ctrlp_use_caching = 0
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-elseif executable('ack')
-  let g:ctrlp_user_command = 'ack -g --nocolor "" %s'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-  \ }
-endif
 
 "=====================[ DragVisuals ]===================== {{{1
 vmap <expr> <LEFT> DVB_Drag('left')
