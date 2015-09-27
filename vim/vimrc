@@ -120,6 +120,7 @@ Plugin 'junegunn/limelight.vim'
 Plugin 'beyondwords/vim-twig'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'othree/html5.vim'
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -225,6 +226,13 @@ autocmd BufEnter *.php :set iskeyword+=\$
 
 set cursorline
 set cursorcolumn
+
+if (v:version >= 703)
+    set colorcolumn=120 " Marks n-th character in every line
+"else
+    "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+    "match OverLength /\%121v.\+/
+endif
 
 "=====================[ Text Format ]===================== {{{1
 set tabstop=4
@@ -421,12 +429,8 @@ set nospell                           " Spell checking off
 "set spelllang pl
 "setlocal spell spelllang=pl
 
-if (v:version >= 703)
-    set colorcolumn=120 " Marks n-th character in every line
-else
-    highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-    match OverLength /\%121v.\+/
-endif
+" dictionary work completion
+set complete+=kspell
 
 "=====================[ CTags ]===================== {{{1
 if filereadable("~/.vim/ctags/php")
