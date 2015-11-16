@@ -64,6 +64,9 @@ Plugin 'Raimondi/delimitMate'
 " syntax checking
 Plugin 'scrooloose/syntastic'
 
+" automatically adjusts 'shiftwidth' and 'expandtab' heuristically
+Plugin 'tpope/vim-sleuth'
+
 " js syntax enhencment vim > 7.4
 Plugin 'pangloss/vim-javascript'
 
@@ -94,9 +97,6 @@ Plugin 'Lokaltog/vim-easymotion'
 
 " *.md have markdown ft
 Plugin 'tpope/vim-markdown'
-
-" add .gitignore rules to wildignore
-"Plugin 'vim-scripts/gitignore'
 
 " rough color previews for css
 Plugin 'gorodinskiy/vim-coloresque'
@@ -189,6 +189,8 @@ let g:thematic#theme_name = 'badwolf'
 "=====================[ ListChars and whitespace visibility ]===================== {{{1
 " set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
 
+set list listchars=tab:→\ ,trail:·
+
 "if (v:version >= 703)
     "set listchars=trail:·,precedes:«,extends:»,tab:▸\
     "set list
@@ -251,6 +253,7 @@ let php_folding=1
 " indents for differrent filetypes
 au FileType html,vim,tpl,smarty,css,sass,scss setl tabstop=2 shiftwidth=2
 "au FileType html,tpl,smarty setl omnifunc=htmlcomplete#CompleteTags
+" Tim Pope's sleuth will override this
 au FileType php,javascript setl tabstop=4 ai cindent si shiftwidth=4
 au FileType txt setl paste
 
@@ -259,7 +262,7 @@ set ignorecase " Case insensitive search
 set smartcase " Non-case sensitive search
 set incsearch
 set hlsearch " highlight search results
-set wildignore+=*.o,*.obj,*.exe,*.so,*.dll,*.pyc,.svn,.hg,.bzr,.git,.sass-cache,.swp,.*~,*.orig
+set wildignore+=*.o,*.obj,*.exe,*.so,*.dll,*.pyc,.svn,.hg,.bzr,.git,.sass-cache,.swp,.*~,*.orig,cache
 " Suffixes that get lower priority when doing tab completion for filenames. These are files we are not likely to want to edit or read.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.class,.orig
 
@@ -488,8 +491,6 @@ endif
 
 "nnoremap <silent> <D-t> :CtrlP<CR>
 "nnoremap <silent> <D-r> :CtrlPMRU<CR>
-"unlet g:ctrlp_custom_ignore 
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 "let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 let g:ctrlp_extensions = ['dir', 'line']
@@ -497,10 +498,9 @@ let g:ctrlp_extensions = ['dir', 'line']
 " That's because you don't escape ~ in the pattern you use for
 " ctrlp_custom_ignore. In Vim, when used in a pattern, ~ matches the last
 " given substitute string. Won't be used if ctrlp_user_command is set
-" \ 'dir':  '\v[\/]\.(git|hg|svn|nbproject)$',
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v(\.(git|hg|svn|nbproject|sass-cache)|(szablony_c|combined))$',
-    \ 'file': '\v\.(exe|swp|\~|dll|jpg|gif|png|orig|class|lock)$',
+    \ 'dir':  '\v(\.(git|hg|svn|nbproject|sass-cache))|(szablony_c|combined|cache|build/css)$',
+    \ 'file': '\v(\.(exe|swp|\~|dll|jpg|gif|png|orig|class|lock|phpstorm.meta.php|DS_Store))|(_ide_helper.php|_ide_helper_models.php)$',
 \ }
 "let g:ctrlp_clear_cache_on_exit=1
 "let g:ctrlp_show_hidden = 0
