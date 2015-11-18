@@ -5,12 +5,11 @@
 # source bashrc if it exists
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-echo helllo
-export TERM='xterm-256color'
-export EDITOR='vim'
+export TERM=xterm-256color
+export EDITOR=vim
 
 export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+#export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
