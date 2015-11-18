@@ -26,7 +26,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'godlygeek/tabular'
 
 " improved behaviour for <C-a> / <C-x>
-Plugin 'tpope/vim-speeddating' 
+Plugin 'tpope/vim-speeddating'
 
 " colorscheme bundle
 Plugin 'flazz/vim-colorschemes'
@@ -37,10 +37,10 @@ Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
 
 " more actions for visual selection
-Plugin 'gavinbeatty/dragvisuals.vim' 
+Plugin 'gavinbeatty/dragvisuals.vim'
 
 " improved tabs behaviour (renaming)
-Plugin 'gcmt/taboo.vim' 
+Plugin 'gcmt/taboo.vim'
 Plugin 'joonty/vdebug.git'
 Plugin 'xolox/vim-misc'
 
@@ -48,7 +48,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'gcmt/wildfire.vim'
 
 " automatic ctags generation
-Plugin 'xolox/vim-easytags' 
+Plugin 'xolox/vim-easytags'
 
 " version control
 Plugin 'ludovicchabant/vim-lawrencium'
@@ -66,6 +66,8 @@ Plugin 'scrooloose/syntastic'
 
 " js syntax enhencment vim > 7.4
 Plugin 'pangloss/vim-javascript'
+
+Plugin 'elzr/vim-json'
 
 " enables . cmd for selected plugins (e.g., surround)
 Plugin 'tpope/vim-repeat'
@@ -116,7 +118,11 @@ Plugin 'klen/python-mode'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 
-" ================[[ Syntax Plugins ]] ============== {{{2 
+" themes
+Plugin 'jdkanani/vim-material-theme'
+Plugin 'NLKNguyen/papercolor-theme'
+
+" ================[[ Syntax Plugins ]] ============== {{{2
 Plugin 'beyondwords/vim-twig'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'othree/html5.vim'
@@ -182,9 +188,15 @@ let g:thematic#themes = {
 \             'airline-theme': 'badwolf',
 \             'ruler': 1,
 \            },
+\ 'material': {'colorscheme': 'material-theme',
+\             'background': 'dark',
+\             'airline-theme': 'badwolf',
+\             'ruler': 1,
+\            },
 \ }
 "let g:thematic#theme_name = 'jellybeans'
-let g:thematic#theme_name = 'badwolf'
+"let g:thematic#theme_name = 'badwolf'
+let g:thematic#theme_name = 'material'
 
 "=====================[ ListChars and whitespace visibility ]===================== {{{1
 " set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
@@ -341,7 +353,7 @@ cabbrev shell Shell
 command! HgBlame call s:ExecuteInShell('hg blame -ucdq %', '<bang>')
 
 " diffexpr that ignores all whitespace (http://stackoverflow.com/a/4271247/1105871)
-" example usage: 
+" example usage:
 " set diffexpr=DiffW()
 "function DiffW()
     "let opt = ""
@@ -488,7 +500,7 @@ endif
 
 "nnoremap <silent> <D-t> :CtrlP<CR>
 "nnoremap <silent> <D-r> :CtrlPMRU<CR>
-"unlet g:ctrlp_custom_ignore 
+"unlet g:ctrlp_custom_ignore
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 "let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
@@ -646,7 +658,7 @@ let g:airline#extensions#branch#enabled = 1
 "=====================[ Emmet ]===================== {{{1
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,tpl EmmetInstall
-"let g:user_emmet_leader_key='<C-y>'
+let g:user_emmet_leader_key='<C-y>'
 
 "=====================[ PIV ]===================== {{{1
 " don't add vim foldmarks to phpdocs
@@ -681,5 +693,8 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+"=====================[ vim-json ]========================= {{{1
+let g:vim_json_syntax_conceal = 0
 "=====================[ EOF ]===================== {{{1
 " vim: foldmethod=marker foldcolumn=2 foldlevel=0
