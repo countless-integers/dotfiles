@@ -5,12 +5,12 @@ echo -e Linking config files..."\n"
 backupsuffix="bak$(date +%Y%m%d%H%M)"
 while read -r source target
 do
-    if [ -e $target ]; then
-        mv -v $target{,.$backupsuffix}
-    fi
     if [ ! -e $source ]; then 
         echo Trying to link an inexisting dotfile: $source, skipping...
         continue
+    fi
+    if [ -e $target ]; then
+        mv -v $target{,.$backupsuffix}
     fi
     ln -vs $source $target
     echo -e "\n"
@@ -24,6 +24,7 @@ $HOME/dotfiles/mc/skins             $HOME/.local/share/mc/skins
 $HOME/dotfiles/screen/screenrc      $HOME/.screenrc
 $HOME/dotfiles/tmux/tmux.conf       $HOME/.tmux.conf
 $HOME/dotfiles/vim/vimrc            $HOME/.vimrc
+# @todo: deal with dirs
 DOTFILE_TO_LINK_DESTINATION_MAPPING
 
 echo -e ...everything in its place."\n"
