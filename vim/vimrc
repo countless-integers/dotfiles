@@ -72,6 +72,8 @@ Plugin 'pangloss/vim-javascript'
 
 Plugin 'elzr/vim-json'
 
+Plugin 'vim-scripts/vim-vagrant'
+
 " enables . cmd for selected plugins (e.g., surround)
 Plugin 'tpope/vim-repeat'
 
@@ -193,14 +195,20 @@ let g:thematic#themes = {
 \             'airline-theme': 'badwolf',
 \             'ruler': 1,
 \            },
+\ 'monokai-chris': {'colorscheme': 'monokai-chris',
+\             'background': 'dark',
+\             'airline-theme': 'molokai',
+\             'ruler': 1,
+\            },
 \ }
 "let g:thematic#theme_name = 'jellybeans'
 "if has("gui_macvim")
 if has("gui_running")
   let g:thematic#theme_name = 'material'
 else
-  let g:thematic#theme_name = 'badwolf'
+  let g:thematic#theme_name = 'monokai-chris'
 endif
+
 
 "=====================[ ListChars and whitespace visibility ]===================== {{{1
 " set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
