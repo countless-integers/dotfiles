@@ -32,7 +32,9 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'flazz/vim-colorschemes'
 
 Plugin 'vim-scripts/loremipsum'
-Plugin 'Shougo/neocomplcache.vim'
+
+"Plugin 'Shougo/neocomplcache.vim'
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
 
@@ -41,6 +43,7 @@ Plugin 'gavinbeatty/dragvisuals.vim'
 
 " improved tabs behaviour (renaming)
 Plugin 'gcmt/taboo.vim'
+
 Plugin 'joonty/vdebug.git'
 Plugin 'xolox/vim-misc'
 
@@ -548,35 +551,43 @@ let NERDTreeQuitOnOpen=0
 let NERDTreeChDirMode=1
 
 "=====================[ NeoCompleteCache ]===================== {{{1
-"
 " Disable AutoComplPop.
 " let g:acp_enableAtStartup = 0
-" " Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-" let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+    \ }
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
 " Enable omni completion.
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
-" if !exists('g:neocomplcache_omni_patterns')
-"   let g:neocomplcache_omni_patterns = {}
-"   endif
-"   let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"   let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"   let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:]
-"   *\t]\%(\.\|->\)\|\h\w*::'
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 "=====================[ NeoSnippet ]===================== {{{1
 " Plugin key-mappings.
