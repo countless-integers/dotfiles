@@ -1,2 +1,2 @@
 #!/bin/bash
-ag --php '(?<=\s)(ddd?|var_dump|die\;)'
+ag --php '(?<=\s)(ddd?|var_dump|die\;)' $@
