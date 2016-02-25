@@ -3,7 +3,6 @@
     path = ~/.gitconfig.local
 [core]
     editor = vim
-    excludefile = ~/.gitignore
     excludesfile = ~/.gitignore
 [merge]
     tool = vimdiff

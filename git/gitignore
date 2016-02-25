@@ -6,12 +6,7 @@
 # Binary gettext files
 *.po
 
-# vim
-*.swp
-*.swo
-.swo
-*.swn
-.swn
+# vim temp files
 *.sw?
 *~
 

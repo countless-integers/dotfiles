@@ -1,0 +1,12 @@
+{
+    "extend": [
+        "/usr/local/lib/node_modules/eslint/conf/eslint.json"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 5,
+        "sourceType": "script"
+    },
+    "rules": {
+        "semi": 2
+    }
+}
