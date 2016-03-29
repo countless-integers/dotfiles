@@ -13,6 +13,6 @@ export CLICOLOR=1
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
-    PATH=~/bin:"${PATH}"
+    PATH="${PATH}":/usr/local/bin:~/bin
 fi
 export PATH
