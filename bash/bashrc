@@ -30,6 +30,8 @@ if [ -f ~/dotfiles/bash/git-completion.bash ]; then
     . ~/dotfiles/bash/git-completion.bash
 fi
 
+stty -ixon
+
 ### Prompt {{{1
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -151,11 +153,13 @@ fi
 export XDEBUG_CONFIG='remote_host=127.0.0.1 idekey=xdebug remote_port=9091'
 
 # XDebug
-#if [ "$TERM" != 'screen' ] && [ "$TERM" != 'screen-256color' ] ; then
+if [ "$TERM" != 'screen' ] && [ "$TERM" != 'screen-256color' ] ; then
     #IP=$(last -n1 `whoami` | head -n1 | sed -e 's/.* \([0-9.]\{7,15\}\) .*/\1/')
     #perl -i -pe "s/php_value xdebug\.remote_host .*/php_value xdebug.remote_host ${IP}/" ~/.htaccess
     #export XDEBUG_CONFIG="remote_host=${IP} idekey=netbeans-xdebug"
-#fi 
+    IP=$(docker-machine ip dev)
+    export XDEBUG_CONFIG="remote_host=${IP} idekey=xdebug"
+fi 
 
 ### aliases {{{1
 alias motd='fortune -a | fmt -80 -s | cowsay -$(shuf -n 1 -e b d g p s t w y) -f $(shuf -n 1 -e $(cowsay -l | tail -n +2)) -n'
