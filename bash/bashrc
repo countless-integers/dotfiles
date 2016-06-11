@@ -193,3 +193,5 @@ fi
 # autocomplete after typing command: e.g., ls <arrow_up>
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+
+alias lsp='sudo lsof -P -i -n | grep LISTEN'
