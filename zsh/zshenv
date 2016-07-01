@@ -1,2 +1,2 @@
 typeset -U path
-path=(~/bin ./vedor/bin $path[@])
+path=(~/bin ./vendor/bin $path[@])
