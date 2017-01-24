@@ -1,0 +1,129 @@
+set modeline                  " so it'll read the next line
+" vim: foldmethod=marker foldlevel=0
+
+set nocompatible              " be iMproved
+
+"=====================[ Behaviour ]===================== {{{1
+syntax on
+syntax enable
+
+if (has('unnamedplus'))
+    set clipboard=unnamedplus                    "  Yanks go on clipboard instead.
+else
+    set clipboard=unnamed                        "  Yanks go on clipboard instead.
+endif
+set autoread                                     "  Automatically reload changes if detected
+set wildmenu                                     "  Turn on WiLd menu
+set hidden                                       "  Change buffer - without saving
+set history=1000                                 "  Number of things to remember in history.
+set cf                                           "  Enable error files & error jumping.
+set autowrite                                    "  Writes on make/shell commands
+"set timeoutlen=350                              "  Time to wait for a command (after leader for example)
+set timeout timeoutlen=1500 ttimeoutlen=250
+set formatoptions=crql
+set cpoptions+=$                                 "  add $ sign to the boundry of change command
+set foldlevelstart=99                            "  Remove folds
+set foldopen=block,hor,mark,percent,quickfix,tag "  what movements opens folds
+set rnu                                          " relative line numbers as opposed to nu
+set nu                                           " combined with rnu give hybrid rnu with current line number
+set nrformats=                                   " when <C-a> or <C-x> is used on a zero padded number
+                                                 " use decimal instead of octal system
+set complete=.,w,b,u,U " Better complete options to speed it up
+
+" treat $word as a word in PHP files
+autocmd BufEnter *.php :set iskeyword+=\$
+
+set cursorline
+set cursorcolumn
+
+set colorcolumn=120 " Marks n-th character in every line
+
+"=====================[ Text Format ]===================== {{{1
+set tabstop=4
+set backspace=2 " Delete everything with backspace
+set shiftwidth=4 " Tabs under smart indent
+set cindent
+set autoindent
+set smarttab
+set expandtab
+set backspace=2
+set textwidth=120
+set foldenable
+set foldmethod=syntax
+let php_folding=1
+
+" indents for differrent filetypes
+au FileType html,vim,tpl,smarty,css,sass,scss setl tabstop=2 shiftwidth=2
+"au FileType html,tpl,smarty setl omnifunc=htmlcomplete#CompleteTags
+" Tim Pope's sleuth will override this
+au FileType php,javascript setl tabstop=4 ai cindent si shiftwidth=4
+au FileType txt setl paste
+
+"=====================[ Search ]===================== {{{1
+set ignorecase " Case insensitive search
+set smartcase " Non-case sensitive search
+set incsearch
+set hlsearch " highlight search results
+
+"=====================[ Visual ]===================== {{{1
+set showmatch                                                    "  Show matching brackets.
+set matchtime=2                                                  "  How many tenths of a second to blink
+
+"=====================[ Sounds ]===================== {{{1
+set noerrorbells
+set novisualbell
+set t_vb=
+
+"=====================[ Mouse ]===================== {{{1
+"set mousehide          "  Hide mouse after chars typed
+"set mouse=a            "  Mouse in all modes
+"set ttymouse=xterm2    " Helps with mouse intercept inside screen
+
+"=====================[ Keybindings ]===================== {{{1
+imap jj <C-c>
+imap j; $;<C-c>
+map <F3> :b#<CR>
+
+nmap WW :w<CR>
+imap WW <C-c>:w<CR>i
+
+nmap <C-w>L :action MoveEditorToOppositeTabGroup<CR>
+nmap <C-w>H :action MoveEditorToOppositeTabGroup<CR>
+
+" expand %% to current directory
+" does not work
+"cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+" unimpaired mappings
+nnoremap [<space> O<esc>j
+nnoremap ]<space> o<esc>k
+nnoremap [q :action PreviousOccurence<cr>
+nnoremap ]q :action NextOccurence<cr>
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
+nnoremap [c :action VcsShowPrevChangeMarker<cr>
+nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
+" built-in navigation to navigated items works better
+nnoremap <c-o> :action Back<cr>
+nnoremap <c-i> :action Forward<cr>
+" but preserve ideavim defaults
+nnoremap g<c-o> <c-o>
+nnoremap g<c-i> <c-i>
+
+" does not work
+"nnoremap <silent> <leader>w :call argwrap#toggle()<CR>
+"nnoremap <silent> <leader>r :syntax sync fromstart<CR>
+nmap <silent> <leader>n :set rnu!<CR>
+
+" built in search looks better
+nnoremap / :action Find<cr>
+" but preserve ideavim search
+nnoremap g/ /
+" clear the search buffer when hitting return
+nnoremap <space><cr> :nohlsearch<cr>
+
+nnoremap <silent> <leader>p :set paste!<CR>
+
+"=====================[ encodings and internationalization ]===================== {{{1
+set fileencodings=ucs-bom,utf-8,default,latin2
