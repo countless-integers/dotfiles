@@ -1,0 +1,39 @@
+"*":
+  "atom-beautify":
+    general:
+      _analyticsUserId: "e845a003-cc94-48b3-b0a5-0733da6f4e13"
+  "command-palette":
+    preserveLastSearch: true
+  core:
+    projectHome: "/Users/adrian/Projects/Work"
+    telemetryConsent: "no"
+    titleBar: "custom-inset"
+  editor:
+    fontSize: 16
+    showIndentGuide: true
+    softWrap: true
+    tabType: "soft"
+  "exception-reporting":
+    userId: "d913ace7-b0fa-96fd-3f66-4b5e27d57042"
+  "linter-ui-default": {}
+  "save-session":
+    dataSaveFolder: "/Users/adrian/.atom/packages/save-session/projects"
+  "terminal-plus":
+    ansiColors:
+      normal:
+        blue: "#2a5fcd"
+        red: "#cd3057"
+    core: {}
+    iconColors:
+      blue: "#487eff"
+    style:
+      theme: "homebrew"
+  "vim-mode-plus":
+    incrementalSearch: true
+    showHoverSearchCounter: true
+    smoothScrollOnFullScrollMotion: true
+    smoothScrollOnHalfScrollMotion: true
+    useSmartcaseForSearch: true
+    useSmartcaseForSearchCurrentWord: true
+  welcome:
+    showOnStartup: false

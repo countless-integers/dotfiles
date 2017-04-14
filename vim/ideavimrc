@@ -48,16 +48,6 @@ set smarttab
 set expandtab
 set backspace=2
 set textwidth=120
-set foldenable
-set foldmethod=syntax
-let php_folding=1
-
-" indents for differrent filetypes
-au FileType html,vim,tpl,smarty,css,sass,scss setl tabstop=2 shiftwidth=2
-"au FileType html,tpl,smarty setl omnifunc=htmlcomplete#CompleteTags
-" Tim Pope's sleuth will override this
-au FileType php,javascript setl tabstop=4 ai cindent si shiftwidth=4
-au FileType txt setl paste
 
 "=====================[ Search ]===================== {{{1
 set ignorecase " Case insensitive search
@@ -74,11 +64,6 @@ set noerrorbells
 set novisualbell
 set t_vb=
 
-"=====================[ Mouse ]===================== {{{1
-"set mousehide          "  Hide mouse after chars typed
-"set mouse=a            "  Mouse in all modes
-"set ttymouse=xterm2    " Helps with mouse intercept inside screen
-
 "=====================[ Keybindings ]===================== {{{1
 imap jj <C-c>
 imap j; $;<C-c>
@@ -90,9 +75,8 @@ imap WW <C-c>:w<CR>i
 nmap <C-w>L :action MoveEditorToOppositeTabGroup<CR>
 nmap <C-w>H :action MoveEditorToOppositeTabGroup<CR>
 
-" expand %% to current directory
-" does not work
-"cnoremap %% <C-R>=expand('%:h').'/'<cr>
+" split line by comma sign
+map <leader>w vab:'<,'>s/[\[\(,]/\0\r/g<CR>vab:'<,'>s/[\]\)]/\r\0/g<CR>vab=]
 
 " unimpaired mappings
 nnoremap [<space> O<esc>j
@@ -123,7 +107,3 @@ nnoremap g/ /
 " clear the search buffer when hitting return
 nnoremap <space><cr> :nohlsearch<cr>
 
-nnoremap <silent> <leader>p :set paste!<CR>
-
-"=====================[ encodings and internationalization ]===================== {{{1
-set fileencodings=ucs-bom,utf-8,default,latin2
