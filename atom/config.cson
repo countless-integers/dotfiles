@@ -11,6 +11,7 @@
   editor:
     fontSize: 16
     showIndentGuide: true
+    showInvisibles: true
     softWrap: true
     tabType: "soft"
   "exception-reporting":
