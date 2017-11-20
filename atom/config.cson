@@ -5,18 +5,21 @@
   "command-palette":
     preserveLastSearch: true
   core:
+    disabledPackages: [
+      "relative-numbers"
+    ]
     projectHome: "/Users/adrian/Projects/Work"
     telemetryConsent: "no"
     titleBar: "custom-inset"
   editor:
-    fontSize: 16
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
     tabType: "soft"
   "exception-reporting":
     userId: "d913ace7-b0fa-96fd-3f66-4b5e27d57042"
-  "linter-ui-default": {}
+  "linter-ui-default":
+    panelHeight: 69
   "save-session":
     dataSaveFolder: "/Users/adrian/.atom/packages/save-session/projects"
   "terminal-plus":
@@ -29,8 +32,11 @@
       blue: "#487eff"
     style:
       theme: "homebrew"
+  "tree-view":
+    hideVcsIgnoredFiles: true
   "vim-mode-plus":
     incrementalSearch: true
+    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
     showHoverSearchCounter: true
     smoothScrollOnFullScrollMotion: true
     smoothScrollOnHalfScrollMotion: true

@@ -200,6 +200,11 @@ let g:thematic#themes = {
 \             'airline-theme': 'badwolf',
 \             'ruler': 1,
 \            },
+\ 'papercolor': {'colorscheme': 'PaperColor',
+\             'background': 'dark',
+\             'airline-theme': 'badwolf',
+\             'ruler': 1,
+\            },
 \ 'monokai-chris': {'colorscheme': 'monokai-chris',
 \             'background': 'dark',
 \             'airline-theme': 'molokai',
@@ -211,7 +216,7 @@ let g:thematic#themes = {
 if has("gui_running")
   let g:thematic#theme_name = 'material'
 else
-  let g:thematic#theme_name = 'monokai-chris'
+  let g:thematic#theme_name = 'papercolor'
 endif
 
 
