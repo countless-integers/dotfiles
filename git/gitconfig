@@ -21,6 +21,7 @@
     co = checkout
     branches = branch --all -v
     br = symbolic-ref --short HEAD
+    branch-commits = !git log $(git rev-parse --abbrev-ref HEAD) --not master
     fe = fetch -ap
     di = diff --color-words
     # Pretty looking log
