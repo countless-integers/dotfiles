@@ -25,6 +25,7 @@ $HOME/dotfiles/screen/screenrc      $HOME/.screenrc
 $HOME/dotfiles/tmux/tmux.conf       $HOME/.tmux.conf
 $HOME/dotfiles/vim/vimrc            $HOME/.vimrc
 $HOME/dotfiles/eslintrc.json        $HOME/.eslintrc.json
+$HOME/dotfiles/zsh/zshrc	    $HOME/.zshrc
 # @todo: deal with dirs
 DOTFILE_TO_LINK_DESTINATION_MAPPING
 

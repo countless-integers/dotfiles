@@ -59,7 +59,7 @@ plugins=(git composer docker colored-man-pages common-aliases jira web-search zs
 
 # User configuration
 
-export PATH="${HOME}/bin:./vedor/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/usr/local/sbin:/sbin:${HOME}/.gem/ruby/2.0.0/bin:vendor/bin"
+export PATH="${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/usr/local/sbin:/sbin:${HOME}/.gem/ruby/2.0.0/bin:./vendor/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -68,12 +68,18 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='vim'
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+  export VISUAL='vim'
+else
+  export EDITOR='vim'
+  export VISUAL='vim'
+fi
+export PAGER=less
+export LESS=meiX
+
+# default mask
+umask 022
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
