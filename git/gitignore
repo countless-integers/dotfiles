@@ -21,3 +21,4 @@
 .gtm/
 .vscode/
 .idea/
+.vagrant/

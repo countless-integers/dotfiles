@@ -21,3 +21,6 @@ eval "$(docker-machine env dev)"
 
 chmod +x ~/.vocab
 ~/.vocab
+export HOMEBREW_NO_ANALYTICS=1
+
+export PATH=/usr/local/Cellar/openssl/1.0.2n/bin:$PATH
