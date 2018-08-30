@@ -9,7 +9,8 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="wezm"
 #ZSH_THEME="honukai"
 #ZSH_THEME="avit"
-ZSH_THEME="suvash"
+#ZSH_THEME="suvash"
+ZSH_THEME="materialshell"
 
 DOTNET_CLI_TELEMETRY_OPTOUT=1
 
@@ -57,7 +58,29 @@ DOTNET_CLI_TELEMETRY_OPTOUT=1
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git composer docker colored-man-pages common-aliases jira web-search zsh-syntax-highlighting git-it-on docker-compose gulp cp colorize brew thefuck)
+plugins=(
+  brew
+  colored-man-pages
+  colorize
+  common-aliases
+  composer
+  cp
+  dirhistory
+  docker
+  docker-compose
+  fasd
+  git
+  git-it-on
+  gulp
+  jira
+  osx
+  python
+  sudo
+  vscode
+  web-search
+  yarn
+  zsh-syntax-highlighting
+)
 
 # User configuration
 
@@ -115,4 +138,3 @@ if [ -f $HOME/Downloads/google-cloud-sdk/completion.zsh.inc ]; then
   source $HOME/Downloads/google-cloud-sdk/completion.zsh.inc
 fi
 
-eval $(thefuck --alias)

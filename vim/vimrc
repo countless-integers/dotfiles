@@ -103,9 +103,6 @@ Plugin 'vim-scripts/ZoomWin'
 " fast movement \e
 Plugin 'Lokaltog/vim-easymotion'
 
-" *.md have markdown ft
-Plugin 'tpope/vim-markdown'
-
 " rough color previews for css
 Plugin 'gorodinskiy/vim-coloresque'
 
@@ -134,6 +131,8 @@ Plugin 'beyondwords/vim-twig'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'othree/html5.vim'
 Plugin 'fatih/vim-go'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'tpope/vim-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -195,9 +194,9 @@ let g:thematic#themes = {
 \             'airline-theme': 'badwolf',
 \             'ruler': 1,
 \            },
-\ 'material': {'colorscheme': 'material-theme',
+\ 'material': {'colorscheme': 'hybrid',
 \             'background': 'dark',
-\             'airline-theme': 'badwolf',
+\             'airline-theme': 'hybrid',
 \             'ruler': 1,
 \            },
 \ 'papercolor': {'colorscheme': 'PaperColor',
@@ -216,7 +215,7 @@ let g:thematic#themes = {
 if has("gui_running")
   let g:thematic#theme_name = 'material'
 else
-  let g:thematic#theme_name = 'papercolor'
+  let g:thematic#theme_name = 'material'
 endif
 
 
