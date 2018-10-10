@@ -36,11 +36,55 @@
         "typescriptreact",
         "yml"
     ],
-    "workbench.iconTheme": "material-icon-theme",
+    "workbench.iconTheme": "eq-material-theme-icons",
     "terminal.integrated.lineHeight": 1.4,
     "behatChecker.configFile": "behat.yml",
     "typescript.check.npmIsInstalled": false,
-    "workbench.panel.location": "right",
+    "workbench.panel.location": "bottom",
     "window.zoomLevel": 0,
-    "gitlens.advanced.telemetry.enabled": false
+    "gitlens.advanced.telemetry.enabled": false,
+    "material-icon-theme.showUpdateMessage": false,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true,
+        "suppressUpdateNotice": true,
+        "suppressWelcomeNotice": true
+    },
+    "gitlens.keymap": "alternate",
+    "materialTheme.cache.workbench.settings": {
+        "themeColours": "Darker"
+    },
+    "workbench.colorTheme": "Material Theme Darker",
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "before": ["Z", "Z"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                },
+                {
+                    "command": "workbench.action.closeActiveEditor",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "terminal.integrated.copyOnSelection": true,
+    "gitlens.historyExplorer.enabled": true,
+    "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": true
 }
