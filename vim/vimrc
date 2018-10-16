@@ -311,7 +311,9 @@ set t_vb=
 "=====================[ Mouse ]===================== {{{1
 set mousehide          "  Hide mouse after chars typed
 set mouse=a            "  Mouse in all modes
-set ttymouse=xterm2    " Helps with mouse intercept inside screen
+if !has('nvim')
+  set ttymouse=xterm2    " Helps with mouse intercept inside screen
+endif
 
 
 "=====================[ Utility Functions ]===================== {{{1
