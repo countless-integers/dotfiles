@@ -25,9 +25,13 @@ $HOME/dotfiles/screen/screenrc      $HOME/.screenrc
 $HOME/dotfiles/tmux/tmux.conf       $HOME/.tmux.conf
 $HOME/dotfiles/vim/vimrc            $HOME/.vimrc
 $HOME/dotfiles/eslintrc.json        $HOME/.eslintrc.json
-$HOME/dotfiles/zsh/zshrc	    $HOME/.zshrc
+$HOME/dotfiles/zsh/zshrc	        $HOME/.zshrc
 # @todo: deal with dirs
 DOTFILE_TO_LINK_DESTINATION_MAPPING
+
+if [ `uname -s` = 'Darwin' ]; then
+    ln -vs $HOME/dotfiles/vscode/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
+fi
 
 echo -e ...everything in its place."\n"
 
