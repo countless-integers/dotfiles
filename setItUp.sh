@@ -41,4 +41,8 @@ if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
     vim +PluginInstall +qall &>/dev/null
 fi
 
+if [ -d ~/.oh-my-zsh ]; then
+    wget https://raw.githubusercontent.com/carloscuesta/materialshell/master/materialshell.zsh -O .oh-my-zsh/themes/materialshell.zsh-theme
+fi
+
 echo "To find backups use: find $HOME -iname '*.$backupsuffix'"
