@@ -36,7 +36,7 @@
         "typescriptreact",
         "yml"
     ],
-    "workbench.iconTheme": "eq-material-theme-icons",
+    "workbench.iconTheme": "eq-material-theme-icons-darker",
     "terminal.integrated.lineHeight": 1.4,
     "behatChecker.configFile": "behat.yml",
     "typescript.check.npmIsInstalled": false,
@@ -60,7 +60,7 @@
     "materialTheme.cache.workbench.settings": {
         "themeColours": "Darker"
     },
-    "workbench.colorTheme": "Material Theme Darker",
+    "workbench.colorTheme": "Material Theme Darker High Contrast",
     "vim.insertModeKeyBindings": [
         {
             "before": ["j", "j"],
@@ -86,5 +86,7 @@
     "terminal.integrated.copyOnSelection": true,
     "gitlens.historyExplorer.enabled": true,
     "editor.minimap.enabled": false,
-    "breadcrumbs.enabled": true
+    "breadcrumbs.enabled": true,
+    "go.inferGopath": true,
+    "explorer.confirmDragAndDrop": false
 }

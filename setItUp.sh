@@ -24,6 +24,7 @@ $HOME/dotfiles/mc/skins             $HOME/.local/share/mc/skins
 $HOME/dotfiles/screen/screenrc      $HOME/.screenrc
 $HOME/dotfiles/tmux/tmux.conf       $HOME/.tmux.conf
 $HOME/dotfiles/vim/vimrc            $HOME/.vimrc
+$HOME/dotfiles/vim/ideavimrc        $HOME/.ideavimrc
 $HOME/dotfiles/eslintrc.json        $HOME/.eslintrc.json
 $HOME/dotfiles/zsh/zshrc	        $HOME/.zshrc
 # @todo: deal with dirs
