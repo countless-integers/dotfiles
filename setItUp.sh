@@ -34,6 +34,15 @@ if [ `uname -s` = 'Darwin' ]; then
     ln -vs $HOME/dotfiles/vscode/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
 fi
 
+if [ `which nvim` ]; then
+    if [ `uname -s` = 'Darwin' ]; then
+        ln -vs $HOME/dotfiles/nvim/init.vim $HOME/.config/nvim/init.vim
+    else
+        ln -vs $HOME/dotfiles/nvim/init.vim $XDG_CONFIG_HOME/nvim/init.vim
+    fi
+fi
+
+
 echo -e ...everything in its place."\n"
 
 if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
@@ -43,7 +52,7 @@ if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
 fi
 
 if [ -d ~/.oh-my-zsh ]; then
-    wget https://raw.githubusercontent.com/carloscuesta/materialshell/master/materialshell.zsh -O .oh-my-zsh/themes/materialshell.zsh-theme
+    wget https://raw.githubusercontent.com/carloscuesta/materialshell/master/materialshell.zsh -O $HOME/.oh-my-zsh/themes/materialshell.zsh-theme
 fi
 
 echo "To find backups use: find $HOME -iname '*.$backupsuffix'"
