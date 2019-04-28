@@ -13,14 +13,43 @@ call vundle#begin()
 " required!
 Plugin 'gmarik/Vundle.vim'
 
+" ====== appearance tweaks 
+
+" colorscheme bundle
+Plugin 'flazz/vim-colorschemes'
+
+" theme management
+Plugin 'reedes/vim-thematic'
+
+" status line theming:
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" themes
+Plugin 'jdkanani/vim-material-theme'
+Plugin 'NLKNguyen/papercolor-theme'
+
+" ====== features
+
 " best-plugin-ever
 Plugin 'kien/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
+
+" display tags from the open file in a sidebar
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'tpope/vim-surround'
+
+" version control plugins:
+" git:
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'vim-scripts/DirDiff.vim'
+
+
+" emmet syntax support for faster html tag writting
+Plugin 'mattn/emmet-vim'
 
 " string to ascii-table
 Plugin 'godlygeek/tabular'
@@ -28,12 +57,8 @@ Plugin 'godlygeek/tabular'
 " improved behaviour for <C-a> / <C-x>
 Plugin 'tpope/vim-speeddating'
 
-" colorscheme bundle
-Plugin 'flazz/vim-colorschemes'
-
 Plugin 'vim-scripts/loremipsum'
 
-"Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
@@ -45,24 +70,17 @@ Plugin 'gavinbeatty/dragvisuals.vim'
 Plugin 'gcmt/taboo.vim'
 
 Plugin 'joonty/vdebug.git'
-Plugin 'xolox/vim-misc'
 
 " smart selection of the closest text object
 Plugin 'gcmt/wildfire.vim'
 
+" dependency of vim-easytags
+Plugin 'xolox/vim-misc'
+
 " automatic ctags generation
 Plugin 'xolox/vim-easytags'
 
-" version control
-Plugin 'ludovicchabant/vim-lawrencium'
-Plugin 'tpope/vim-fugitive'
-" graphic git repo browser
-Plugin 'gregsexton/gitv'
-Plugin 'vim-scripts/DirDiff.vim'
-
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
+" auto-insert closing brackets:
 Plugin 'Raimondi/delimitMate'
 
 " syntax checking
@@ -71,17 +89,8 @@ Plugin 'scrooloose/syntastic'
 " automatically adjusts 'shiftwidth' and 'expandtab' heuristically
 Plugin 'tpope/vim-sleuth'
 
-" js syntax enhencment vim > 7.4
-Plugin 'pangloss/vim-javascript'
-
-Plugin 'elzr/vim-json'
-
-Plugin 'vim-scripts/vim-vagrant'
-
 " enables . cmd for selected plugins (e.g., surround)
 Plugin 'tpope/vim-repeat'
-
-Plugin 'mattn/emmet-vim'
 
 " almost like sublimes feature
 Plugin 'terryma/vim-multiple-cursors'
@@ -89,12 +98,10 @@ Plugin 'terryma/vim-multiple-cursors'
 " extra brace mappings
 Plugin 'tpope/vim-unimpaired'
 
-Plugin 'reedes/vim-thematic'
-
 " marking changed lines from VC
 Plugin 'mhinz/vim-signify'
 
-" argument (un-)wrapping
+" argument (un-)wrapping (split arguments across multiple lines)
 Plugin 'FooSoft/vim-argwrap'
 
 " <c-o> to window only, <c-o> again to undo
@@ -113,18 +120,26 @@ Plugin 'peeja/vim-cdo'
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
+" distraction free writing (enable with :Goyo)
+Plugin 'junegunn/goyo.vim'
+" add-on to goyo that highlights current paragraph
+Plugin 'junegunn/limelight.vim'
+
+
+" ===== language / syntax support
+
 " enhanced php support
 Plugin 'spf13/PIV'
 Plugin 'StanAngeloff/php.vim'
+Plugin 'shawncplus/phpcomplete.vim'
+
 Plugin 'klen/python-mode'
 
-" distraction free writing
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
+" js syntax enhancment vim > 7.4
+Plugin 'pangloss/vim-javascript'
 
-" themes
-Plugin 'jdkanani/vim-material-theme'
-Plugin 'NLKNguyen/papercolor-theme'
+" syntax highlight for json
+Plugin 'elzr/vim-json'
 
 " ================[[ Syntax Plugins ]] ============== {{{2
 Plugin 'beyondwords/vim-twig'
@@ -158,16 +173,6 @@ endif
 if has("gui_macvim")
   set guifont=Menlo:h14
 endif
-
-" http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
-"try
-    "colorscheme busierbee " omnicompletion menu lack in contrast
-    "colorscheme busybee
-    "colorscheme devbox-dark-256
-    "colorscheme molokai
-"catch
-    "colorscheme jellybeans
-"endtry
 
 "=====================[ Thematic ]===================== {{{1
 
@@ -261,13 +266,6 @@ autocmd BufEnter *.php :set iskeyword+=\$
 
 set cursorline
 set cursorcolumn
-
-if (v:version >= 703)
-    set colorcolumn=120 " Marks n-th character in every line
-"else
-    "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-    "match OverLength /\%121v.\+/
-endif
 
 "=====================[ Text Format ]===================== {{{1
 set tabstop=4
