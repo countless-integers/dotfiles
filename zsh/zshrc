@@ -62,7 +62,7 @@ plugins=(
   brew
   colored-man-pages
   colorize
-  common-aliases
+  #common-aliases
   composer
   cp
   dirhistory
@@ -80,12 +80,17 @@ plugins=(
   web-search
   yarn
   zsh-syntax-highlighting
+  zsh-select
 )
 
 # User configuration
 
 export PATH="./bin:./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/usr/local/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+if [ -d ${HOME}/Library/Python/3.7/bin/ ]; then
+  export PATH=${PATH}:${HOME}/Library/Python/3.7/bin
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -131,3 +136,8 @@ if [ -f $HOME/Downloads/google-cloud-sdk/completion.zsh.inc ]; then
   source $HOME/Downloads/google-cloud-sdk/completion.zsh.inc
 fi
 
+function homestead() {
+    ( cd ~/Projects/Work/homestead && vagrant $*  )
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

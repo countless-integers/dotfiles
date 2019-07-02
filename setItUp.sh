@@ -53,6 +53,8 @@ fi
 
 if [ -d ~/.oh-my-zsh ]; then
     wget https://raw.githubusercontent.com/carloscuesta/materialshell/master/materialshell.zsh -O $HOME/.oh-my-zsh/themes/materialshell.zsh-theme
+    git clone https://github.com/peterhurford/git-it-on.zsh ~/.oh-my-zsh/custom/plugins/git-it-on
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
 
 echo "To find backups use: find $HOME -iname '*.$backupsuffix'"
