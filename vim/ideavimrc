@@ -106,3 +106,4 @@ nnoremap g/ /
 " clear the search buffer when hitting return
 nnoremap <space><cr> :nohlsearch<cr>
 
+cmap tabonly :action CloseAllEditorsButActive
