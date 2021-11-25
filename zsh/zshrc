@@ -134,6 +134,8 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible/vault_pass
+
 alias tf=terraform
 alias art=php artisan
 
