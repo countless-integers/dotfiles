@@ -7,11 +7,7 @@ set nocompatible              " be iMproved
 syntax on
 syntax enable
 
-if (has('unnamedplus'))
-    set clipboard=unnamedplus                    "  Yanks go on clipboard instead.
-else
-    set clipboard=unnamed                        "  Yanks go on clipboard instead.
-endif
+set clipboard=unnamedplus,unnamed
 set autoread                                     "  Automatically reload changes if detected
 set wildmenu                                     "  Turn on WiLd menu
 set hidden                                       "  Change buffer - without saving
@@ -92,11 +88,6 @@ nnoremap g<c-i> <c-i>
 
 "nmap <silent> <leader>n :set rnu!<CR>
 
-
-"=====================[ IdeaVim ]===================== {{{1
-set surround
-set multiple-cursors
-
 " built in search looks better
 nnoremap / :action Find<cr>
 map \r :action ReformatCode<cr>
@@ -106,4 +97,13 @@ nnoremap g/ /
 " clear the search buffer when hitting return
 nnoremap <space><cr> :nohlsearch<cr>
 
-cmap tabonly :action CloseAllEditorsButActive
+nnoremap <c-w>O :action CloseAllEditorsButActive<cr>
+
+"=====================[ IdeaVim ]===================== {{{1
+set surround
+set multiple-cursors
+
+set ideajoin
+
+" bug workaround: https://youtrack.jetbrains.com/issue/VIM-2075
+map zR :action ExpandAllRegions<CR>:action ExpandAllRegions<CR>
