@@ -1,0 +1,67 @@
+" ----------------------------------------------------------------------------
+" General settings
+" ----------------------------------------------------------------------------
+
+set expandtab
+set shiftwidth=4
+set tabstop=4
+set hidden
+"set signcolumn=yes:2
+set relativenumber
+set number
+set termguicolors
+set undofile
+"set spell
+set title
+set ignorecase
+set smartcase
+set wildmode=longest:full,full
+set nowrap
+set list
+set listchars=tab:▸\ ,trail:·
+set mouse=a
+set scrolloff=8
+set sidescrolloff=8
+set nojoinspaces
+set clipboard=unnamedplus,unnamed
+set confirm
+set exrc
+
+" ----------------------------------------------------------------------------
+" Keybindings
+" ----------------------------------------------------------------------------
+
+let mapleader = "\\"
+
+" Allow gf to open non-existent files
+map gf :edit <cfile><cr>
+
+imap jj <esc>
+
+" Easy insertion of a trailing ; or , from insert mode
+imap ;; <Esc>A;<Esc>
+imap ,, <Esc>A,<Esc>
+
+cmap w!! %!sudo tee > /dev/null %
+
+" ----------------------------------------------------------------------------
+" Plugins
+" ----------------------------------------------------------------------------
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin(data_dir . '/plugs')
+
+source ~/dotfiles/vim/plugin.config/nerd-tree.vim
+source ~/dotfiles/vim/plugin.config/nerd-commenter.vim
+source ~/dotfiles/vim/plugin.config/fugitive.vim
+source ~/dotfiles/vim/plugin.config/polyglot.vim
+source ~/dotfiles/vim/plugin.config/fzf.vim
+source ~/dotfiles/vim/plugin.config/thematic.vim
+
+call plug#end()
+" doautocmd User PlugLoaded
