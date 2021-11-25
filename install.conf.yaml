@@ -1,0 +1,21 @@
+--- 
+
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.vimrc: vim/vimrc
+    ~/.ideavimrc: vim/ideavimrc
+    ~/.zshrc: zsh/zshrc
+    ~/.screenrc: screen/screenrc
+    ~/.gitignore: git/gitignore
+    ~/.gitconfig: git/gitconfig
+    ~/bin/:
+      create: true
+      glob: true
+      path: bin/*
+
