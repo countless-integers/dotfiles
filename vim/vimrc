@@ -26,6 +26,7 @@ set nojoinspaces
 set clipboard=^unnamed,unnamedplus
 set confirm
 set exrc
+set encoding=UTF-8
 
 " ----------------------------------------------------------------------------
 " Keybindings
