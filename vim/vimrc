@@ -23,7 +23,9 @@ set mouse=a
 set scrolloff=8
 set sidescrolloff=8
 set nojoinspaces
-set clipboard=^unnamed,unnamedplus
+if has('clipboard') && has('unnamedplus')
+  set clipboard=^unnamed,unnamedplus
+endif
 set confirm
 set exrc
 set encoding=UTF-8
