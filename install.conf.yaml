@@ -6,6 +6,10 @@
 
 - clean: ['~']
 
+- create:
+  - ~/.tmux
+  - ~/bin
+
 - link:
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vimrc: vim/vimrc
@@ -18,8 +22,9 @@
       create: true
       glob: true
       path: bin/*
+    ~/.ripgreprc: ripgrep/ripgreprc
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - ["vim +PlugUpdate +PlugClean! +qa", Installing and updating plugins]
-    - [git clone "https://github.com/tmux-plugins/tpm" ~/.tmux/plugins/tpm, Installing Tmux Plugin Manager]
+    - ["git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true", Installing Tmux Plugin Manager]
