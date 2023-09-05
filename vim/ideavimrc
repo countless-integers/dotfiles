@@ -99,6 +99,9 @@ nnoremap <space><cr> :nohlsearch<cr>
 
 nnoremap <c-w>O :action CloseAllEditorsButActive<cr>
 
+nnoremap [b :bufferNext<CR>
+nnoremap [b :bufferPrevious<CR>
+
 "=====================[ IdeaVim ]===================== {{{1
 set surround
 set multiple-cursors
