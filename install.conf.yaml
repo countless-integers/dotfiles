@@ -22,9 +22,23 @@
       create: true
       glob: true
       path: bin/*
-    ~/.ripgreprc: ripgrep/ripgreprc
+    ~/.ripgreprc: 
+      if: 'command -v rg >/dev/null 2>&1'
+      path: ripgrep/ripgreprc
+    ~/.config/bottom/bottom.toml: 
+      if: 'command -v bottom >/dev/null 2>&1'
+      path: bottom/bottom.toml
+    ~/.config/starship.toml: 
+      if: 'command -v starship >/dev/null 2>&1'
+      path: starship/starship.toml
+    ~/.config/bat/:
+      if: 'command -v bat >/dev/null 2>&1'
+      create: true
+      glob: true
+      path: bat/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - ["vim +PlugUpdate +PlugClean! +qa", Installing and updating plugins]
     - ["git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true", Installing Tmux Plugin Manager]
+    - ["command -v bat >/dev/null 2>&1 && bat cache --build", Re-build bat cache if bat is available]

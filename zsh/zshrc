@@ -126,9 +126,13 @@ export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible/vault_pass
 alias tf=terraform
 alias art=php artisan
 
-PROMPT='
-%{$fg_bold[grey]%}[%{$reset_color%}%{$fg_bold[${host_color}]%}%n@%m%{$reset_color%}%{$fg_bold[grey]%}]%{$reset_color%} %{$fg_bold[blue]%}%10c%{$reset_color%} $(git_prompt_info) $(git_remote_status) $(tf_prompt_info)
-%{$fg_bold[cyan]%}❯%{$reset_color%} '
+if which starship > /dev/null; then
+  eval "$(starship init zsh)"
+else 
+  PROMPT='
+  %{$fg_bold[grey]%}[%{$reset_color%}%{$fg_bold[${host_color}]%}%n@%m%{$reset_color%}%{$fg_bold[grey]%}]%{$reset_color%} %{$fg_bold[blue]%}%10c%{$reset_color%} $(git_prompt_info) $(git_remote_status) $(tf_prompt_info)
+  %{$fg_bold[cyan]%}❯%{$reset_color%} '
+fi
 
 if which pyenv > /dev/null; then
   export PATH="$HOME/.pyenv/bin:$PATH"
@@ -138,4 +142,9 @@ fi
 export PATH="./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 # @see: https://github.com/BurntSushi/ripgrep/issues/1373#issuecomment-753659388
-export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+if which rg > /dev/null; then
+  export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+fi
+if which ddgr > /dev/null; then
+  alias ddgr=ddgr -n 5
+fi
