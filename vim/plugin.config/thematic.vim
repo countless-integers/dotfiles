@@ -1,5 +1,8 @@
-Plug 'reedes/vim-thematic'
 Plug 'flazz/vim-colorschemes'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'vim-airline/vim-airline'
+
+Plug 'reedes/vim-thematic'
 
 let g:thematic#themes = {
 \ 'jellybeans': {'laststatus': 2,
@@ -38,10 +41,30 @@ let g:thematic#themes = {
 \             'airline-theme': 'molokai',
 \             'ruler': 1,
 \            },
+\ 'catppuccin-macchiato': {'colorscheme': 'catppuccin_macchiato',
+\             'background': 'dark',
+\             'airline-theme': 'catppuccin_macchiato',
+\             'ruler': 1,
+\            },
+\ 'catppuccin-mocha': {'colorscheme': 'catpuccin_mocha',
+\             'background': 'dark',
+\             'airline-theme': 'catppuccin_mocha',
+\             'ruler': 1,
+\            },
+\ 'catppuccin-latte': {'colorscheme': 'catpuccin_latte',
+\             'background': 'light',
+\             'airline-theme': 'catppuccin_latte',
+\             'ruler': 1,
+\            },
+\ 'catppuccin-frappe': {'colorscheme': 'catpuccin_frappe',
+\             'background': 'dark',
+\             'airline-theme': 'catppuccin_frappe',
+\             'ruler': 1,
+\            },
 \ }
 
 if has("gui_running")
-  let g:thematic#theme_name = 'material'
+  let g:thematic#theme_name = 'catppuccin-macchiato'
 else
-  let g:thematic#theme_name = 'material'
+  let g:thematic#theme_name = 'catppuccin-macchiato'
 endif

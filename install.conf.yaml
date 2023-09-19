@@ -14,6 +14,10 @@
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vimrc: vim/vimrc
     ~/.ideavimrc: vim/ideavimrc
+    ~/.config/nvim/init.vim: 
+      if: 'command -v nvim >/dev/null 2>&1'
+      create: true
+      path: nvim/init.vim
     ~/.zshrc: zsh/zshrc
     ~/.screenrc: screen/screenrc
     ~/.gitignore: git/gitignore
