@@ -5,8 +5,9 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
-$cmd_duration\
 $python\
+$terraform\
+$cmd_duration\
 $line_break\
 $character"""
 
