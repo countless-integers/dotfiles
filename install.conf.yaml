@@ -46,3 +46,4 @@
     - ["vim +PlugUpdate +PlugClean! +qa", Installing and updating plugins]
     - ["git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true", Installing Tmux Plugin Manager]
     - ["command -v bat >/dev/null 2>&1 && bat cache --build", Re-build bat cache if bat is available]
+    - ["git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting", zsh-syntax-highlighting plugin install]
