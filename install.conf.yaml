@@ -3,6 +3,7 @@
 - defaults:
     link:
       relink: true
+      force: true
 
 - clean: ['~']
 
@@ -19,6 +20,10 @@
       create: true
       path: nvim/init.vim
     ~/.zshrc: zsh/zshrc
+    ~/.zsh/themes/: 
+      create: true
+      glob: true
+      path: zsh/themes/*
     ~/.screenrc: screen/screenrc
     ~/.gitignore: git/gitignore
     ~/.gitconfig: git/gitconfig
@@ -40,10 +45,16 @@
       create: true
       glob: true
       path: bat/*
+    "~/Library/Application Support/Code/User/settings.json":
+      if: '[ `uname` = Darwin ]'
+      create: true
+      path: vscode/settings.json
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - ["vim +PlugUpdate +PlugClean! +qa", Installing and updating plugins]
     - ["git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true", Installing Tmux Plugin Manager]
     - ["command -v bat >/dev/null 2>&1 && bat cache --build", Re-build bat cache if bat is available]
-    - ["git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting", zsh-syntax-highlighting plugin install]
+    - ["git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true", zsh-syntax-highlighting plugin install]
+    - ["git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab", FZF tab completion in ZSH]
+    - ["git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions", ZSH autosuggestions]
