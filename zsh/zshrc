@@ -53,6 +53,9 @@ DOTNET_CLI_TELEMETRY_OPTOUT=1
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# does not work at the moment @see: https://github.com/catppuccin/zsh-syntax-highlighting/issues/6
+#source ~/.zsh/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -64,6 +67,8 @@ plugins=(
   colorize
   cp
   fd
+  fzf
+  fzf-tab # to turn it on and off: toggle-fzf-tab
   docker
   docker-compose
   httpie
@@ -75,7 +80,8 @@ plugins=(
   vscode
   web-search
   yarn
-  zsh-syntax-highlighting
+  zsh-autosuggestions
+  zoxide
 )
 
 # User configuration
@@ -101,16 +107,26 @@ export LESS=meiX
 # default mask
 umask 022
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+## FZF-Tab settings
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# # set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# # set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# # preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# # switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
 
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible/vault_pass
 
 alias tf=terraform
 alias art=php artisan
+alias gti=git
 
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
@@ -125,7 +141,7 @@ if command -v pyenv >/dev/null 2>&1; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi
-export PATH="./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="./vendor/bin:${HOME}/.composer/vendor/bin:${HOME}/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 # @see: https://github.com/BurntSushi/ripgrep/issues/1373#issuecomment-753659388
 if command -v rg >/dev/null 2>&1; then
@@ -137,4 +153,5 @@ fi
 if command -v lsd >/dev/null 2>&1; then
   alias ls='lsd'
   alias lt='ls --tree'
+  alias tree='ls --tree'
 fi
