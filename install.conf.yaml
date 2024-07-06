@@ -40,8 +40,9 @@
     ~/.config/starship.toml: 
       if: 'command -v starship >/dev/null 2>&1'
       path: starship/starship.toml
+      create: true
     ~/.config/bat/:
-      if: 'command -v bat >/dev/null 2>&1'
+      if: 'command -v bat >/dev/null 2>&1 || command -v batcat >/dev/null 2>&1'
       create: true
       glob: true
       path: bat/*
@@ -55,6 +56,7 @@
     - ["vim +PlugUpdate +PlugClean! +qa", Installing and updating plugins]
     - ["git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true", Installing Tmux Plugin Manager]
     - ["command -v bat >/dev/null 2>&1 && bat cache --build", Re-build bat cache if bat is available]
+    - ["command -v batcat >/dev/null 2>&1 && batcat cache --build", Re-build bat cache if bat is available]
     - ["git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true", zsh-syntax-highlighting plugin install]
     - ["git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab", FZF tab completion in ZSH]
     - ["git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions", ZSH autosuggestions]
