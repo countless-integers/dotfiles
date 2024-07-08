@@ -54,9 +54,46 @@
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - ["vim +PlugUpdate +PlugClean! +qa", Installing and updating plugins]
-    - ["git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true", Installing Tmux Plugin Manager]
-    - ["command -v bat >/dev/null 2>&1 && bat cache --build", Re-build bat cache if bat is available]
-    - ["command -v batcat >/dev/null 2>&1 && batcat cache --build", Re-build bat cache if bat is available]
-    - ["git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true", zsh-syntax-highlighting plugin install]
-    - ["git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab", FZF tab completion in ZSH]
-    - ["git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions", ZSH autosuggestions]
+    - description: "Clone or update the Tmux Plugin Manager"
+      command: |
+        REPO_PATH="~/.tmux/plugins/tpm"
+        REPO_URL="https://github.com/tmux-plugins/tpm"
+        if [ ! -d "$REPO_PATH/.git" ]; then
+          git clone "$REPO_URL" "$REPO_PATH"
+        else
+          git -C "$REPO_PATH" pull
+        fi
+    - description: "Re-build BAT cache"
+      command: |
+        if command -v bat &>/dev/null; then
+          bat cache --build
+        elif command -v batcat &>/dev/null; then
+          batcat cache --build
+        fi
+    - description: "Clone or update the zsh-syntax-highlighting plugin for zsh"
+      command: |
+        REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+        REPO_URL="https://github.com/zsh-users/zsh-syntax-highlighting.git"
+        if [ ! -d "$REPO_PATH/.git" ]; then
+          git clone "$REPO_URL" "$REPO_PATH"
+        else
+          git -C "$REPO_PATH" pull
+        fi
+    - description: "Clone or update the fzf-tab plugin for zsh"
+      command: |
+        REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+        REPO_URL="https://github.com/Aloxaf/fzf-tab"
+        if [ ! -d "$REPO_PATH/.git" ]; then
+          git clone "$REPO_URL" "$REPO_PATH"
+        else
+          git -C "$REPO_PATH" pull
+        fi
+    - description: "Clone or update the zsh-autosuggestions plugin"
+      command: |
+        REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+        REPO_URL="https://github.com/zsh-users/zsh-autosuggestions"
+        if [ ! -d "$REPO_PATH/.git" ]; then
+          git clone "$REPO_URL" "$REPO_PATH"
+        else
+          git -C "$REPO_PATH" pull
+        fi
