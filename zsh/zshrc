@@ -49,6 +49,13 @@ DOTNET_CLI_TELEMETRY_OPTOUT=1
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
+HISTFILE=$HOME/.zsh_history
+SAVEHIST=1000
+HISTSIZE=999
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -130,7 +137,7 @@ alias gti=git
 
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
-else 
+else
   PROMPT='
   %{$fg_bold[grey]%}[%{$reset_color%}%{$fg_bold[${host_color}]%}%n@%m%{$reset_color%}%{$fg_bold[grey]%}]%{$reset_color%} %{$fg_bold[blue]%}%10c%{$reset_color%} $(git_prompt_info) $(git_remote_status) $(tf_prompt_info)
   %{$fg_bold[cyan]%}❯%{$reset_color%} '
