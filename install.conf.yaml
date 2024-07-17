@@ -1,4 +1,4 @@
---- 
+---
 
 - defaults:
     link:
@@ -15,12 +15,12 @@
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vimrc: vim/vimrc
     ~/.ideavimrc: vim/ideavimrc
-    ~/.config/nvim/init.vim: 
+    ~/.config/nvim/init.vim:
       if: 'command -v nvim >/dev/null 2>&1'
       create: true
       path: nvim/init.vim
     ~/.zshrc: zsh/zshrc
-    ~/.zsh/themes/: 
+    ~/.zsh/themes/:
       create: true
       glob: true
       path: zsh/themes/*
@@ -31,13 +31,13 @@
       create: true
       glob: true
       path: bin/*
-    ~/.ripgreprc: 
+    ~/.ripgreprc:
       if: 'command -v rg >/dev/null 2>&1'
       path: ripgrep/ripgreprc
-    ~/.config/bottom/bottom.toml: 
+    ~/.config/bottom/bottom.toml:
       if: 'command -v bottom >/dev/null 2>&1'
       path: bottom/bottom.toml
-    ~/.config/starship.toml: 
+    ~/.config/starship.toml:
       if: 'command -v starship >/dev/null 2>&1'
       path: starship/starship.toml
       create: true
@@ -50,6 +50,11 @@
       if: '[ `uname` = Darwin ]'
       create: true
       path: vscode/settings.json
+    ~/.config/alacritty/:
+      if: 'command -v alacritty >/dev/null 2>&1'
+      create: true
+      glob: true
+      path: alacritty/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
