@@ -19,3 +19,8 @@ normal.family = "JetBrainsMono Nerd Font Mono"
 size = 18
 offset.y = 6
 glyph_offset.y = 3
+
+[keyboard]
+bindings = [
+  { key = "Key6", mods = "Control", chars = "\u001e" }
+]
