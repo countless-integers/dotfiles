@@ -8,11 +8,12 @@
 - clean: ['~']
 
 - create:
-  - ~/.tmux
   - ~/bin
 
 - link:
-    ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmux.conf:
+      if: 'command -v tmux >/dev/null 2>&1'
+      path: tmux/tmux.conf
     ~/.vimrc: vim/vimrc
     ~/.ideavimrc: vim/ideavimrc
     ~/.config/nvim/init.vim:
@@ -61,13 +62,20 @@
     - ["vim +PlugUpdate +PlugClean! +qa", Installing and updating plugins]
     - description: "Clone or update the Tmux Plugin Manager"
       command: |
-        REPO_PATH="~/.tmux/plugins/tpm"
+        if ! command -v tmux &>/dev/null; then
+          exit 0
+        fi
+        REPO_PATH="$HOME/.tmux/plugins/tpm"
         REPO_URL="https://github.com/tmux-plugins/tpm"
         if [ ! -d "$REPO_PATH/.git" ]; then
           git clone "$REPO_URL" "$REPO_PATH"
         else
           git -C "$REPO_PATH" pull
         fi
+        tmux source ~/.tmux.conf
+      quiet: true
+      stderr: true
+      stdout: true
     - description: "Re-build BAT cache"
       command: |
         if command -v bat &>/dev/null; then
@@ -75,6 +83,9 @@
         elif command -v batcat &>/dev/null; then
           batcat cache --build
         fi
+      quiet: true
+      stderr: true
+      stdout: true
     - description: "Clone or update the zsh-syntax-highlighting plugin for zsh"
       command: |
         REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
@@ -84,6 +95,9 @@
         else
           git -C "$REPO_PATH" pull
         fi
+      quiet: true
+      stderr: true
+      stdout: true
     - description: "Clone or update the fzf-tab plugin for zsh"
       command: |
         REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
@@ -93,6 +107,9 @@
         else
           git -C "$REPO_PATH" pull
         fi
+      quiet: true
+      stderr: true
+      stdout: true
     - description: "Clone or update the zsh-autosuggestions plugin"
       command: |
         REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
@@ -102,3 +119,6 @@
         else
           git -C "$REPO_PATH" pull
         fi
+      quiet: true
+      stderr: true
+      stdout: true
