@@ -16,10 +16,11 @@
       path: tmux/tmux.conf
     ~/.vimrc: vim/vimrc
     ~/.ideavimrc: vim/ideavimrc
-    ~/.config/nvim/init.vim:
+    ~/.config/nvim/:
       if: 'command -v nvim >/dev/null 2>&1'
       create: true
-      path: nvim/init.vim
+      glob: true
+      path: nvim/*
     ~/.zshrc: zsh/zshrc
     ~/.zsh/themes/:
       create: true
