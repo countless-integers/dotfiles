@@ -5,10 +5,17 @@ require('mason-lspconfig').setup({
   }
 })
 local lsp_config = require('lspconfig')
-lsp_config.lua_ls.setup({})
 
+-- @fixme: make this check for that module first...
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- setup LSPs for different languages
+lsp_config.lua_ls.setup({
+  capabilities = capabilities
+})
+
+-- bindings and the like
 -- @see: :h vim.lsp.buf
-
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
