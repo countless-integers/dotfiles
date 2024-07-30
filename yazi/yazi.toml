@@ -1,0 +1,7 @@
+[opener]
+edit = [
+  # editor
+  { run = 'nvim "$@"', block = true, for = "unix" },
+  { run = 'nvim "$@"', block = true, for = "unix" },
+  { run = 'code "%*"', orphan = true, for = "windows" },
+]

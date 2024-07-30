@@ -56,6 +56,11 @@
       glob: true
       path: alacritty/*
     ~/.wezterm.lua: wezterm/wezterm.lua
+    ~/.config/yazi/:
+      if: 'command -v yazi >/dev/null 2>&1'
+      create: true
+      glob: true
+      path: yazi/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
