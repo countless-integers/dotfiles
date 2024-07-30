@@ -46,8 +46,8 @@ DOTNET_CLI_TELEMETRY_OPTOUT=1
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 HISTSIZE=1000
-SAVEHIST=$HISTFILE
 HISTFILE=$HOME/.zsh_history
+#SAVEHIST=$HISTFILE
 HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
@@ -77,7 +77,6 @@ plugins=(
   colored-man-pages
   colorize
   cp
-  fd
   fzf
   fzf-tab # to turn it on and off: toggle-fzf-tab
   docker
@@ -86,7 +85,6 @@ plugins=(
   git
   macos
   python
-  ripgrep
   sudo
   vscode
   web-search
@@ -166,9 +164,9 @@ if command -v nvim >/dev/null 2>&1; then
 fi
 
 export LESS=meiX
-if command -v bat >/dev/null 2>&1; then 
+if command -v bat >/dev/null 2>&1; then
   export PAGER=bat
-elif command -v batcat >/dev/null 2>&1; then 
+elif command -v batcat >/dev/null 2>&1; then
   export PAGER=batcat
 else
   export PAGER=less
