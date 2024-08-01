@@ -24,7 +24,6 @@
       create: true
       glob: true
       path: zsh/themes/*
-    ~/.screenrc: screen/screenrc
     ~/.gitignore: git/gitignore
     ~/.gitconfig: git/gitconfig
     ~/bin/:
