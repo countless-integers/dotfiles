@@ -76,7 +76,9 @@
         else
           git -C "$REPO_PATH" pull
         fi
-        tmux source ~/.tmux.conf
+        if [ -n "$TMUX" ]; then
+          tmux source ~/.tmux.conf
+        fi
       quiet: true
       stderr: true
       stdout: true
