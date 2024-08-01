@@ -17,7 +17,7 @@ set autowrite                                    "  Writes on make/shell command
 "set timeoutlen=350                              "  Time to wait for a command (after leader for example)
 set timeout timeoutlen=1500 ttimeoutlen=250
 set formatoptions=crql
-set cpoptions+=$                                 "  add $ sign to the boundry of change command
+set cpoptions+=$                                 "  add $ sign to the boundary of change command
 set foldlevelstart=99                            "  Remove folds
 set foldopen=block,hor,mark,percent,quickfix,tag "  what movements opens folds
 set rnu                                          " relative line numbers as opposed to nu
@@ -31,8 +31,9 @@ autocmd BufEnter *.php :set iskeyword+=\$
 
 set cursorline
 set cursorcolumn
-
 set colorcolumn=120 " Marks n-th character in every line
+
+let mapleader = " "
 
 "=====================[ Text Format ]===================== {{{1
 set tabstop=4
@@ -48,23 +49,38 @@ set textwidth=120
 "=====================[ Search ]===================== {{{1
 set ignorecase " Case insensitive search
 set smartcase " Non-case sensitive search
-set incsearch
+set incsearch " start searching as I start typing
 set hlsearch " highlight search results
 
 "=====================[ Visual ]===================== {{{1
 set showmatch                                                    "  Show matching brackets.
 set matchtime=2                                                  "  How many tenths of a second to blink
 
+"=====================[ IdeaVim Plugins ]===================== {{{1
+set surround " wrap command e.g. cs"'
+set nerdtree " emulate nerdtree behaviour in tree view
+set multiple-cursor
+set ideajoin " use join feature for J 
+set ideaput " native insertion in vim
+
+" plugins that need to be installed:
+set easymotion
+
+set which-key
+set timeoutlen=15000 " set which-key window timeout
+let g:WhichKey_FontSize = 16
+let g:WhichKey_CommandColor = "#41ead4"
+let g:WhichKey_PrefixColor = "#f335b2"
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+let g:WhichKey_ShowVimActions = "true"
+
 "=====================[ Keybindings ]===================== {{{1
+
 imap jj <C-c>
 imap j; $;<C-c>
-map <F3> :b#<CR>
 
-nmap WW :w<CR>
-imap WW <C-c>:w<CR>i
-
-nmap <C-w>L :action MoveEditorToOppositeTabGroup<CR>
-nmap <C-w>H :action MoveEditorToOppositeTabGroup<CR>
+nmap <C-w>L <Action>(MoveEditorToOppositeTabGroup)
+nmap <C-w>H <Action>(MoveEditorToOppositeTabGroup)
 
 " split line by comma sign
 map <leader>w vab:'<,'>s/[\[\(,]/\0\r/g<CR>vab:'<,'>s/[\]\)]/\r\0/g<CR>vab=]
@@ -72,41 +88,44 @@ map <leader>w vab:'<,'>s/[\[\(,]/\0\r/g<CR>vab:'<,'>s/[\]\)]/\r\0/g<CR>vab=]
 " unimpaired mappings
 nnoremap [<space> O<esc>j
 nnoremap ]<space> o<esc>k
-nnoremap [q :action PreviousOccurence<cr>
-nnoremap ]q :action NextOccurence<cr>
-nnoremap [m :action MethodUp<cr>
-nnoremap ]m :action MethodDown<cr>
-nnoremap [c :action VcsShowPrevChangeMarker<cr>
-nnoremap ]c :action VcsShowNextChangeMarker<cr>
+nnoremap [q <Action>(PreviousOccurence)
+nnoremap ]q <Action>(NextOccurence)
+nnoremap [m <Action>(MethodUp)
+nnoremap ]m <Action>(MethodDown)
+nnoremap [c <Action>(VcsShowPrevChangeMarker)
+nnoremap ]c <Action>(VcsShowNextChangeMarker)
 
 " built-in navigation to navigated items works better
-nnoremap <c-o> :action Back<cr>
-nnoremap <c-i> :action Forward<cr>
+nnoremap <c-o> <Action>(Back)
+nnoremap <c-i> <Action>(Forward)
 " but preserve ideavim defaults
 nnoremap g<c-o> <c-o>
 nnoremap g<c-i> <c-i>
 
-"nmap <silent> <leader>n :set rnu!<CR>
-
 " built in search looks better
-nnoremap / :action Find<cr>
-map \r :action ReformatCode<cr>
+nnoremap / <action>(Find)
 
-" but preserve ideavim search
-nnoremap g/ /
 " clear the search buffer when hitting return
 nnoremap <space><cr> :nohlsearch<cr>
 
-nnoremap <c-w>O :action CloseAllEditorsButActive<cr>
+nnoremap <c-w>O <Action>(CloseAllEditorsButActive)
 
 nnoremap [b :bufferNext<CR>
 nnoremap [b :bufferPrevious<CR>
 
-"=====================[ IdeaVim ]===================== {{{1
-set surround
-set multiple-cursors
+"map <leader>n :NERDTreeToggle<CR>
+map <leader>n <Action>(SelectInProjectView)
+map <leader>a <Action>(SearchEverywhere)
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>cr <Action>(RenameElement)
+map <leader>cf <action>(ReformatCode)
+nmap <leader>fg <action>(FindInPath)
+nmap <leader>ff <action>(GotoFile)
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gy <Action>(GotoTypeDeclaration)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gu <Action>(ShowUsages)
+"nmap <leader>gt <Action>(GotoTest)
+nmap <leader>gt <action>(ActivateTerminalToolWindow)
+nmap <leader>gs <Action>(FileStructurePopup)
 
-set ideajoin
-
-" bug workaround: https://youtrack.jetbrains.com/issue/VIM-2075
-map zR :action ExpandAllRegions<CR>:action ExpandAllRegions<CR>
