@@ -103,7 +103,7 @@ nnoremap g<c-o> <c-o>
 nnoremap g<c-i> <c-i>
 
 " built in search looks better
-nnoremap / <action>(Find)
+nmap / <Action>(Find)
 
 " clear the search buffer when hitting return
 nnoremap <space><cr> :nohlsearch<cr>
@@ -117,15 +117,16 @@ nnoremap [b :bufferPrevious<CR>
 map <leader>n <Action>(SelectInProjectView)
 map <leader>a <Action>(SearchEverywhere)
 map <leader>ca <Action>(ShowIntentionActions)
-map <leader>cr <Action>(RenameElement)
-map <leader>cf <action>(ReformatCode)
-nmap <leader>fg <action>(FindInPath)
-nmap <leader>ff <action>(GotoFile)
+"map <leader>cr <Action>(RenameElement)
+map <leader>cr <Action>(Refactorings.QuickListPopupAction)
+map <leader>cf <Action>(ReformatCode)
+nmap <leader>fg <Action>(FindInPath)
+nmap <leader>ff <Action>(GotoFile)
 nmap <leader>gd <Action>(GotoDeclaration)
 nmap <leader>gy <Action>(GotoTypeDeclaration)
 nmap <leader>gi <Action>(GotoImplementation)
 nmap <leader>gu <Action>(ShowUsages)
 "nmap <leader>gt <Action>(GotoTest)
-nmap <leader>gt <action>(ActivateTerminalToolWindow)
+nmap <leader>gt <Action>(ActivateTerminalToolWindow)
 nmap <leader>gs <Action>(FileStructurePopup)
 
