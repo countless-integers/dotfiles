@@ -1,18 +1,35 @@
-require('mason').setup()
-require('mason-lspconfig').setup({
+require("mason").setup()
+require("mason-lspconfig").setup({
   ensure_installed = {
-    'lua_ls',
-  }
+    "lua_ls",
+    "bashls",
+  },
 })
-local lsp_config = require('lspconfig')
+local lsp_config = require("lspconfig")
 
 -- @fixme: make this check for that module first...
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- none ls
+require("mason-null-ls").setup({
+  ensure_installed = {
+    "stylua",
+    "jq",
+    "shellcheck", -- for bash
+  },
+  handlers = {},
+})
+require("null-ls").setup({
+  sources = {
+    -- Anything not supported by mason.
+  },
+})
 
 -- setup LSPs for different languages
 lsp_config.lua_ls.setup({
-  capabilities = capabilities
+  capabilities = capabilities,
 })
+lsp_config.bashls.setup({})
 
 -- bindings and the like
 -- @see: :h vim.lsp.buf
@@ -27,9 +44,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
     end
 
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
-    vim.keymap.set({ 'n', 'v' }, '<leader>cf', vim.lsp.buf.format, {})
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+    vim.keymap.set({ "n", "v" }, "<leader>cf", vim.lsp.buf.format, {})
   end,
 })
