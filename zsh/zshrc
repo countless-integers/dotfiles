@@ -171,3 +171,8 @@ elif command -v batcat >/dev/null 2>&1; then
 else
   export PAGER=less
 fi
+
+if command -v lazygit >/dev/null 2>&1; then
+  alias lazygit='CONFIG_DIR="$HOME/.config/lazygit" lazygit'
+  alias lg=lazygit
+fi
