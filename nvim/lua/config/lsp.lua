@@ -29,7 +29,8 @@ require("null-ls").setup({
 lsp_config.lua_ls.setup({
   capabilities = capabilities,
 })
-lsp_config.bashls.setup({})
+-- lsp_config.bashls.setup({})
+require('lspconfig').bashls.setup({})
 
 -- bindings and the like
 -- @see: :h vim.lsp.buf
