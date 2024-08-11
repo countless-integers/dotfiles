@@ -10,7 +10,7 @@ vim.o.rnu = true
 require('config.lazy')
 require('config.catppuccin')
 require('config.telescope')
-require('config.neo-tree')
+require('config.file-navigation')
 require('config.tree-sitter')
 require('config.lualine')
 require('config.lsp')
