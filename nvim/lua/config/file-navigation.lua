@@ -1,4 +1,5 @@
 vim.keymap.set("n", "<leader>n", ":Neotree filesystem toggle reveal_force_cwd<CR>")
+vim.keymap.set('n', '<leader>-', ":Oil<CR>")
 
 require("oil").setup({
   default_file_explorer = true,
