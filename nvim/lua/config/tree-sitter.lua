@@ -4,8 +4,6 @@ configs.setup({
   ensure_installed = {
     "lua",
     "bash",
-    "javascript",
-    "html",
     -- this is to stop help pages from crashing https://github.com/neovim/neovim/issues/29492
     "vimdoc",
     -- noice recommendations
@@ -13,6 +11,10 @@ configs.setup({
     "regex",
     "markdown",
     "markdown_inline",
+    -- other
+    "javascript",
+    "html",
+    "vue",
   },
   sync_install = false,
   highlight = { enable = true },
