@@ -108,7 +108,8 @@ nmap / <Action>(Find)
 " clear the search buffer when hitting return
 nnoremap <space><cr> :nohlsearch<cr>
 
-map <c-w>o <Action>(HideAllWindows)
+nmap <C-w>o <Action>(CloseAllEditorsButActive)
+nmap <C-w>O <Action>(HideAllWindows)
 
 nnoremap [b :bufferNext<CR>
 nnoremap [b :bufferPrevious<CR>
