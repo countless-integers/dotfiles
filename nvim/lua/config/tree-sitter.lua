@@ -14,6 +14,7 @@ configs.setup({
     -- other
     "javascript",
     "html",
+    "css",
     "vue",
   },
   sync_install = false,
