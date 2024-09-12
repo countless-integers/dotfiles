@@ -15,4 +15,7 @@ return {
     },
     event = { "BufReadPre", "BufNewFile" },
   },
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+  },
 }

@@ -71,3 +71,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set({ "n", "v" }, "<leader>cr", vim.lsp.buf.rename, {})
 	end,
 })
+
+-- auto comment string
+-- this is the only way I found to have native commenting working in vue files
+require('ts_context_commentstring').setup {
+  enable_autocmd = false,
+}
+local get_option = vim.filetype.get_option
+vim.filetype.get_option = function(filetype, option)
+  return option == "commentstring"
+    and require("ts_context_commentstring.internal").calculate_commentstring()
+    or get_option(filetype, option)
+end
