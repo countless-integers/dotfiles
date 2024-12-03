@@ -14,4 +14,12 @@ config.enable_tab_bar = false
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 10
 
+config.window_close_confirmation = 'NeverPrompt'
+config.skip_close_confirmation_for_processes_named = {
+  'bash',
+  'zsh',
+  'tmux',
+  'nu',
+}
+
 return config
