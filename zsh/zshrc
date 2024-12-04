@@ -61,9 +61,6 @@ setopt hist_find_no_dups
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 # does not work at the moment @see: https://github.com/catppuccin/zsh-syntax-highlighting/issues/6
 #source ~/.zsh/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 
@@ -72,26 +69,52 @@ bindkey '^n' history-search-forward
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  aws
-  brew
   colored-man-pages
   colorize
   cp
-  fzf
-  fzf-tab # to turn it on and off: toggle-fzf-tab
-  docker
-  docker-compose
   httpie
   git
-  macos
   python
   sudo
   vscode
   web-search
   yarn
   zsh-autosuggestions
-  zoxide
 )
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    plugins+=(
+      macos
+      brew
+    ) 
+fi
+if command -v aws &>/dev/null; then
+  plugins+=(
+    aws
+  )
+fi
+if command -v docker &>/dev/null; then
+  plugins+=(
+    docker 
+    docker-compose
+  )
+fi
+if command -v fzf &>/dev/null; then
+  plugins+=(
+    fzf
+    fzf-tab # to turn it on and off: toggle-fzf-tab
+  )
+fi
+if command -v atuin &>/dev/null; then
+  plugins+=(
+    atuin
+  )
+fi
+if command -v zoxide &>/dev/null; then
+  plugins+=(
+    zoxide
+  )
+fi
 
 # User configuration
 source $ZSH/oh-my-zsh.sh
@@ -139,6 +162,9 @@ if command -v pyenv >/dev/null 2>&1; then
   export PATH="$HOME/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
+fi
+if command -v cargo >/dev/null 2>&1; then
+  export PATH="$HOME/.cargo/bin:$PATH"
 fi
 export PATH="./vendor/bin:${HOME}/.composer/vendor/bin:${HOME}/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 

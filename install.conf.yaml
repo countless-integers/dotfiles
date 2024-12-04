@@ -133,3 +133,13 @@
       quiet: true
       stderr: true
       stdout: true
+    - description: "Generate oh-my-zsh plugin for atuin"
+      command: |
+        REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/atuin"
+        if command -v atuin &>/dev/null; then
+          mkdir -p $REPO_PATH 2>/dev/null
+          atuin init zsh > $REPO_PATH/atuin.plugin.zsh
+        fi
+      quiet: true
+      stderr: true
+      stdout: true
