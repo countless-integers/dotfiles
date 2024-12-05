@@ -9,6 +9,8 @@ ZSH_THEME="cloud"
 
 DOTNET_CLI_TELEMETRY_OPTOUT=1
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 
 # Uncomment the following line to use case-sensitive completion.
