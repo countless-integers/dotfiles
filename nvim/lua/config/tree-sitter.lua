@@ -16,6 +16,8 @@ configs.setup({
     "html",
     "css",
     "vue",
+    "terraform",
+    "hcl",
     "nu",
   },
   sync_install = false,

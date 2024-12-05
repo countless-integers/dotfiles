@@ -4,6 +4,7 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"bashls",
 		"volar",
+		"terraformls",
 	},
 	handlers = {
 		function(server_name) -- default handler (optional)
@@ -15,9 +16,9 @@ require("mason-lspconfig").setup({
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 			})
 		end,
-    -- this is broken because JS...
-    -- :MasonInstall vue-language-server@2.0.19 
-    -- @see: https://github.com/williamboman/mason-lspconfig.nvim/issues/371#issuecomment-2185401809
+		-- this is broken because JS...
+		-- :MasonInstall vue-language-server@2.0.19
+		-- @see: https://github.com/williamboman/mason-lspconfig.nvim/issues/371#issuecomment-2185401809
 		["volar"] = function()
 			require("lspconfig").volar.setup({
 				filetypes = { "javascript", "vue", "json" },
@@ -74,12 +75,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- auto comment string
 -- this is the only way I found to have native commenting working in vue files
-require('ts_context_commentstring').setup {
-  enable_autocmd = false,
-}
+require("ts_context_commentstring").setup({
+	enable_autocmd = false,
+})
 local get_option = vim.filetype.get_option
 vim.filetype.get_option = function(filetype, option)
-  return option == "commentstring"
-    and require("ts_context_commentstring.internal").calculate_commentstring()
-    or get_option(filetype, option)
+	return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
+		or get_option(filetype, option)
 end
