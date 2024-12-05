@@ -16,6 +16,7 @@ configs.setup({
     "html",
     "css",
     "vue",
+    "nu",
   },
   sync_install = false,
   highlight = { enable = true },
