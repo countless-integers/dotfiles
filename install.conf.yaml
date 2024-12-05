@@ -70,6 +70,11 @@
       create: true
       glob: true
       path: nu/*
+    ~/.config/atuin/:
+      if: 'command -v atuin >/dev/null 2>&1'
+      create: true
+      glob: true
+      path: atuin/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
@@ -143,7 +148,7 @@
         REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/atuin"
         if command -v atuin &>/dev/null; then
           mkdir -p $REPO_PATH 2>/dev/null
-          atuin init zsh > $REPO_PATH/atuin.plugin.zsh
+          atuin init zsh --disable-up-arrow > $REPO_PATH/atuin.plugin.zsh
         fi
       quiet: true
       stderr: true
