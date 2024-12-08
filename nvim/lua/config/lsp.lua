@@ -5,6 +5,7 @@ require("mason-lspconfig").setup({
 		"bashls",
 		"volar",
 		"terraformls",
+		"rust_analyzer",
 	},
 	handlers = {
 		function(server_name) -- default handler (optional)
