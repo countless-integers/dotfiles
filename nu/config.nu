@@ -899,6 +899,8 @@ $env.config = {
 }
 
 alias lg = lazygit
+alias vim = nvim
+alias vi = nvim
 
 use ~/.config/nushell/starship.nu
 source ~/.config/nushell/atuin.nu
