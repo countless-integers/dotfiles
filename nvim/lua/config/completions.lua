@@ -18,7 +18,7 @@ cmp.setup({
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
-    -- jump between insert location in a snippet
+		-- jump between insert location in a snippet
 		["<C-k>"] = function()
 			if ls.expand_or_jumpable() then
 				ls.expand_or_jump()
@@ -36,6 +36,10 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
+		{
+			name = "lazydev",
+			group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+		},
 	}),
 })
 

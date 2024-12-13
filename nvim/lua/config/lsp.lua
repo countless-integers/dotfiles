@@ -69,6 +69,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- some stuff for running lua 
+-- vim.keymap.set("n", "<leader>x", "<cmd>.lua<CR>")
+-- vim.keymap.set("v", "<leader>x", "<cmd>lua<CR>")
+vim.keymap.set("n", "<leader>x", ":.lua<CR>")
+vim.keymap.set("v", "<leader>x", ":lua<CR>")
+
 -- auto comment string
 -- this is the only way I found to have native commenting working in vue files
 require("ts_context_commentstring").setup({
