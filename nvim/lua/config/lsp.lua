@@ -6,6 +6,7 @@ require("mason-lspconfig").setup({
 		"volar",
 		"terraformls",
 		"rust_analyzer",
+		"intelephense",
 	},
 	handlers = {
 		function(server_name) -- default handler (optional)
@@ -69,7 +70,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- some stuff for running lua 
+-- some stuff for running lua
 -- vim.keymap.set("n", "<leader>x", "<cmd>.lua<CR>")
 -- vim.keymap.set("v", "<leader>x", "<cmd>lua<CR>")
 vim.keymap.set("n", "<leader>x", ":.lua<CR>")
