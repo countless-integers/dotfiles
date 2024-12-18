@@ -9,7 +9,26 @@ return {
 			enabled = true,
 			sections = {
 				{ section = "header" },
-				{ icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+				{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+				{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+				{ icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+				{ icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+				{
+					icon = " ",
+					key = "c",
+					desc = "Config",
+					action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+				},
+				{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
+				-- { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+				{
+					icon = "󰒲 ",
+					key = "U",
+					desc = "Lazy update",
+					action = ":Lazy update",
+					enabled = package.loaded.lazy ~= nil,
+				},
+				{ icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1 },
 				{ icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
 				{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 				{ section = "startup" },
@@ -20,7 +39,21 @@ return {
 			timeout = 3000,
 		},
 		quickfile = { enabled = true },
-		statuscolumn = { enabled = true },
+		scroll = { enabled = true },
+		statuscolumn = {
+			enabled = true,
+			left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+			right = { "fold", "git" }, -- priority of signs on the right (high to low)
+			folds = {
+				open = false, -- show open fold icons
+				git_hl = false, -- use Git Signs hl for fold icons
+			},
+			git = {
+				-- patterns to match Git signs
+				patterns = { "GitSign", "MiniDiffSign" },
+			},
+			refresh = 50, -- refresh at most every 50ms
+		},
 		words = { enabled = true },
 		styles = {
 			notification = {
@@ -44,7 +77,7 @@ return {
 			desc = "Select Scratch Buffer",
 		},
 		{
-			"<leader>n",
+			"<leader>N",
 			function()
 				Snacks.notifier.show_history()
 			end,
@@ -150,25 +183,6 @@ return {
 				Snacks.zen.zoom()
 			end,
 			desc = "Toggle Zoom",
-		},
-
-		{
-			"<leader>N",
-			desc = "Neovim News",
-			function()
-				Snacks.win({
-					file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-					width = 0.6,
-					height = 0.6,
-					wo = {
-						spell = false,
-						wrap = false,
-						signcolumn = "yes",
-						statuscolumn = " ",
-						conceallevel = 3,
-					},
-				})
-			end,
 		},
 	},
 	init = function()
