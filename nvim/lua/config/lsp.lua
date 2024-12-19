@@ -10,12 +10,15 @@ require("mason-lspconfig").setup({
 	},
 	handlers = {
 		function(server_name) -- default handler (optional)
-			require("lspconfig")[server_name].setup({})
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			require("lspconfig")[server_name].setup({
+				capabilities = capabilities,
+			})
 		end,
 		["lua_ls"] = function()
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 		end,
 		-- this is broken because JS...
@@ -23,6 +26,7 @@ require("mason-lspconfig").setup({
 		-- @see: https://github.com/williamboman/mason-lspconfig.nvim/issues/371#issuecomment-2185401809
 		["volar"] = function()
 			require("lspconfig").volar.setup({
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 				filetypes = { "javascript", "vue", "json" },
 				init_options = {
 					vue = {
