@@ -1,8 +1,8 @@
 return {
 	{
 		"saghen/blink.cmp",
-    -- use a release tag to download pre-built binaries, lazy fails without it
-    version = 'v0.*',
+		-- use a release tag to download pre-built binaries, lazy fails without it
+		version = "v0.*",
 		-- optional: provides snippets for the snippet source
 		dependencies = {
 			"rafamadriz/friendly-snippets",
@@ -27,14 +27,22 @@ return {
 
 			sources = {
 				default = {
+					"lazydev",
 					"lsp",
 					"path",
 					"snippets",
 					"buffer",
 				},
+				providers = {
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						score_offset = 100,
+					},
+				},
 			},
 			-- experimental signature help support
-			signature = { enabled = true }
+			signature = { enabled = true },
 		},
 	},
 }
