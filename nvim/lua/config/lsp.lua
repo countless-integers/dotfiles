@@ -1,5 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
+  automatic_installation = false,
 	ensure_installed = {
 		"lua_ls",
 		"bashls",
@@ -40,12 +41,20 @@ require("mason-lspconfig").setup({
 
 -- none ls
 require("mason-null-ls").setup({
+	automatic_installation = false,
 	ensure_installed = {
 		"stylua",
 		"jq",
 		"shellcheck", -- for bash
 	},
-	handlers = {},
+	methods = {
+		diagnostics = true,
+		formatting = true,
+		code_actions = true,
+		completion = false,
+		hover = false,
+	},
+	handlers = nil,
 })
 require("null-ls").setup({
 	sources = {
@@ -59,10 +68,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local bufnr = args.buf
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client.supports_method("textDocument/completion") then
+		if client and client.supports_method("textDocument/completion") then
 			vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 		end
-		if client.supports_method("textDocument/definition") then
+		if client and client.supports_method("textDocument/definition") then
 			vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
 		end
 
@@ -79,14 +88,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- vim.keymap.set("v", "<leader>x", "<cmd>lua<CR>")
 vim.keymap.set("n", "<leader>x", ":.lua<CR>")
 vim.keymap.set("v", "<leader>x", ":lua<CR>")
-
--- auto comment string
--- this is the only way I found to have native commenting working in vue files
-require("ts_context_commentstring").setup({
-	enable_autocmd = false,
-})
-local get_option = vim.filetype.get_option
-vim.filetype.get_option = function(filetype, option)
-	return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
-		or get_option(filetype, option)
-end
