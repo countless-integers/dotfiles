@@ -7,6 +7,8 @@ require("mason-lspconfig").setup({
     "volar",
     "terraformls",
     "intelephense",
+    -- "pyright",
+    "ruff",
   },
   handlers = {
     function(server_name) -- default handler (optional)
@@ -19,6 +21,23 @@ require("mason-lspconfig").setup({
       local lspconfig = require("lspconfig")
       lspconfig.lua_ls.setup({
         capabilities = require("blink.cmp").get_lsp_capabilities(),
+      })
+    end,
+    ["ruff"] = function()
+      require("lspconfig").ruff.setup({
+        init_options = {
+          settings = {
+            lineLength = 30,
+            fixAll = true,
+            showSyntaxErrors = true,
+            organizeImports = true,
+            codeAction = {
+              fixViolation = {
+                enable = true
+              }
+            }
+          }
+        }
       })
     end,
     -- this is broken because JS...
@@ -46,6 +65,7 @@ require("mason-null-ls").setup({
     "jq",
     "shellcheck", -- for bash
     "codelldb",
+    --"ruff",
   },
   methods = {
     diagnostics = true,
@@ -77,6 +97,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
     vim.keymap.set({ "n", "v" }, "<leader>cf", vim.lsp.buf.format, {})
     vim.keymap.set({ "n", "v" }, "<leader>cr", vim.lsp.buf.rename, {})
