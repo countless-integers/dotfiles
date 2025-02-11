@@ -75,6 +75,11 @@
       create: true
       glob: true
       path: atuin/*
+    ~/.config/ghostty/:
+      if: 'command -v ghostty >/dev/null 2>&1'
+      create: true
+      glob: true
+      path: ghostty/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
