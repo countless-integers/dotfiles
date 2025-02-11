@@ -905,3 +905,4 @@ alias vi = nvim
 use ~/.config/nushell/starship.nu
 source ~/.config/nushell/atuin.nu
 source ~/.config/nushell/zoxide.nu
+source ~/.config/nushell/theme.nu
