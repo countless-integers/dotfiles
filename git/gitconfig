@@ -30,6 +30,8 @@
     root = rev-parse --show-toplevel
 [push]
     default = simple
+[pull]
+    rebase = true
 [color]
     ui = true
     decorate = short
