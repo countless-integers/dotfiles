@@ -35,4 +35,13 @@ return {
     version = '^5',
     lazy = false,
   },
+  {
+    "mfussenegger/nvim-ansible",
+    ft = { "yaml.ansible" },  -- load this plugin only for Ansible YAML files
+    config = function()
+      -- Optional: Add any configuration or key mappings.
+      -- For instance, you might want to map a key to run a playbook:
+      vim.keymap.set('n', '<leader>te', ":w<CR>:lua require('ansible').run()<CR>", { desc = "Run Ansible playbook", buffer = true })
+    end,
+  },
 }
