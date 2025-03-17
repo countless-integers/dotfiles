@@ -4,4 +4,7 @@ catppuccin.setup({
 })
 
 vim.cmd.colorscheme "catppuccin"
+--
+-- vim.o.background = "light"
+-- vim.cmd.colorscheme "gruvbox"
 

@@ -15,7 +15,7 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true })
 
 -- Plugins configs
 require("config.lazy")
-require("config.catppuccin")
+require("config.themes")
 require("config.telescope")
 require("config.file-navigation")
 require("config.tree-sitter")
