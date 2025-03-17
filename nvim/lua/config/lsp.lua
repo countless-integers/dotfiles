@@ -100,7 +100,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
     vim.keymap.set({ "n", "v" }, "<leader>cf", vim.lsp.buf.format, {})
-    vim.keymap.set({ "n", "v" }, "<leader>cr", vim.lsp.buf.rename, {})
+    -- vim.keymap.set({ "n", "v" }, "<leader>cr", vim.lsp.buf.rename, {})
+
+    vim.keymap.set("n", "<leader>cr", function()
+      -- Check if any attached LSP supports rename
+      for _, lsp_client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        if lsp_client.supports_method("textDocument/rename") then
+          return vim.lsp.buf.rename()
+        end
+      end
+
+      -- Fallback: Open the :%s command for manual renaming
+      local current_word = vim.fn.expand("<cword>")
+      local command = ":%s/\\<" .. current_word .. "\\>//g<Left><Left>"
+       -- from_part = true, do_lt = false, special = true
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(command, true, false, true), "n", false)
+    end, { silent = true, noremap = true, desc = "LSP rename or fallback to :%s" })
   end,
 })
 
