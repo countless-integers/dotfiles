@@ -7,8 +7,8 @@ require("mason-lspconfig").setup({
     "volar",
     "terraformls",
     "intelephense",
-    -- "pyright",
-    "ruff",
+    "pyright",
+    --"ruff",
   },
   handlers = {
     function(server_name) -- default handler (optional)
@@ -65,7 +65,7 @@ require("mason-null-ls").setup({
     "jq",
     "shellcheck", -- for bash
     "codelldb",
-    --"ruff",
+    "ruff",
   },
   methods = {
     diagnostics = true,
