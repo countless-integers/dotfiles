@@ -1,7 +1,16 @@
 local lualine = require("lualine")
 
 lualine.setup({
-  theme = "catppuccin",
+  options = {
+    theme = "auto",
+    disabled_filetypes = {
+      statusline = {
+        "snacks_dashboard",
+        "neo-tree",
+      },
+    },
+    globalstatus = true,
+  },
   sections = {
     lualine_b = {
       -- 	"fancy_branch",
