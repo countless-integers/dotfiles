@@ -3,8 +3,5 @@ catppuccin.setup({
   flavour = "macchiato",
 })
 
-vim.cmd.colorscheme "catppuccin"
---
--- vim.o.background = "light"
--- vim.cmd.colorscheme "gruvbox"
+-- theme set in in ../plugins/theme.lua
 
