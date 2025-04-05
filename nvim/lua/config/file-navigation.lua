@@ -20,6 +20,11 @@ require("neo-tree").setup({
     'buffers',
     'document_symbols',
   },
+  window = {
+    mappings = {
+      ["<space>"] = { "toggle_node", nowait = true },
+    }
+  }
 })
 
 vim.keymap.set("n", "<leader>n", ":Neotree filesystem toggle left reveal_force_cwd<CR>")
