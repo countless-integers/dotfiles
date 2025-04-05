@@ -122,5 +122,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- some stuff for running lua
 -- vim.keymap.set("n", "<leader>x", "<cmd>.lua<CR>")
 -- vim.keymap.set("v", "<leader>x", "<cmd>lua<CR>")
-vim.keymap.set("n", "<leader>x", ":.lua<CR>")
-vim.keymap.set("v", "<leader>x", ":lua<CR>")
+-- vim.keymap.set("n", "<leader>x", ":.lua<CR>")
+-- vim.keymap.set("v", "<leader>x", ":lua<CR>")
+
+local function execute_code(code)
+  local filetype = vim.bo.filetype
+  if filetype == "lua" then
+    vim.cmd('lua ' .. code)
+  elseif filetype == "python" then
+    vim.cmd('!python -c "' .. code .. '"')
+  elseif filetype == "javascript" then
+    vim.cmd('!node -e "' .. code .. '"')
+  elseif filetype == "sh" then
+    vim.cmd('!sh -c "' .. code .. '"')
+  else
+    print("Unsupported file type for execution: " .. filetype)
+  end
+end
+
+vim.keymap.set("n", "<leader>x", function()
+  local line = vim.api.nvim_get_current_line()
+  execute_code(line)
+end)
+vim.keymap.set("v", "<leader>x", function()
+  local visual_selection = vim.fn.getreg('"')
+  execute_code(visual_selection)
+end)
