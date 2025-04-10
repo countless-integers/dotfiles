@@ -80,6 +80,11 @@
       create: true
       glob: true
       path: ghostty/*
+    ~/.config/zellij/:
+      if: 'command -v zellij >/dev/null 2>&1'
+      create: true
+      glob: true
+      path: zellij/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
