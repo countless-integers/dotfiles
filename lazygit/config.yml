@@ -28,6 +28,7 @@ gui:
 
   authorColors:
     '*': '#b7bdf8'
+# END DARK THEME
 
 # LIGHT THEME
 # gui:
@@ -59,6 +60,7 @@ gui:
 #
 #   authorColors:
 #     '*': '#7287fd'
+# END LIGHT THEME
 
 os:
   editPreset: 'nvim'
