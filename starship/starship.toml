@@ -18,7 +18,12 @@ $character"""
 
 add_newline = true
 continuation_prompt = "[▸▹ ](dimmed white)"
+# DARK THEME
 palette = "catppuccin_macchiato"
+# END DARK THEME
+# LIGHT THEME
+# palette = "catppuccin_frappe"
+# END LIGHT THEME
 
 [fill]
 symbol = '∙'
