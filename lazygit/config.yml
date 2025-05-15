@@ -1,65 +1,65 @@
 # DARK THEME
-gui:
-  nerdFontsVersion: "3"
-  scrollHeight: 4
-
-  # Theme macchiato:mauve
-  # @see: https://github.com/catppuccin/lazygit/blob/main/themes-mergable/macchiato/mauve.yml
-  theme:
-    activeBorderColor:
-      - '#c6a0f6'
-      - bold
-    inactiveBorderColor:
-      - '#a5adcb'
-    optionsTextColor:
-      - '#8aadf4'
-    selectedLineBgColor:
-      - '#363a4f'
-    cherryPickedCommitBgColor:
-      - '#494d64'
-    cherryPickedCommitFgColor:
-      - '#c6a0f6'
-    unstagedChangesColor:
-      - '#ed8796'
-    defaultFgColor:
-      - '#cad3f5'
-    searchingActiveBorderColor:
-      - '#eed49f'
-
-  authorColors:
-    '*': '#b7bdf8'
+  gui:
+     nerdFontsVersion: "3"
+     scrollHeight: 4
+   
+     # Theme macchiato:mauve
+     # @see: https://github.com/catppuccin/lazygit/blob/main/themes-mergable/macchiato/mauve.yml
+     theme:
+       activeBorderColor:
+         - '#c6a0f6'
+         - bold
+       inactiveBorderColor:
+         - '#a5adcb'
+       optionsTextColor:
+         - '#8aadf4'
+       selectedLineBgColor:
+         - '#363a4f'
+       cherryPickedCommitBgColor:
+         - '#494d64'
+       cherryPickedCommitFgColor:
+         - '#c6a0f6'
+       unstagedChangesColor:
+         - '#ed8796'
+       defaultFgColor:
+         - '#cad3f5'
+       searchingActiveBorderColor:
+         - '#eed49f'
+   
+     authorColors:
+       '*': '#b7bdf8'
 # END DARK THEME
 
 # LIGHT THEME
-# gui:
-#   nerdFontsVersion: "3"
-#   scrollHeight: 4
-#
-#   # Theme latte:mauve
-#   # @see: https://github.com/catppuccin/lazygit/blob/main/themes-mergable/latte/mauve.yml
-#   theme:
-#       activeBorderColor:
-#         - '#8839ef'
-#         - bold
-#       inactiveBorderColor:
-#         - '#6c6f85'
-#       optionsTextColor:
-#         - '#1e66f5'
-#       selectedLineBgColor:
-#         - '#ccd0da'
-#       cherryPickedCommitBgColor:
-#         - '#bcc0cc'
-#       cherryPickedCommitFgColor:
-#         - '#8839ef'
-#       unstagedChangesColor:
-#         - '#d20f39'
-#       defaultFgColor:
-#         - '#4c4f69'
-#       searchingActiveBorderColor:
-#         - '#df8e1d'
-#
-#   authorColors:
-#     '*': '#7287fd'
+#   gui:
+#      nerdFontsVersion: "3"
+#      scrollHeight: 4
+#   
+#      # Theme latte:mauve
+#      # @see: https://github.com/catppuccin/lazygit/blob/main/themes-mergable/latte/mauve.yml
+#      theme:
+#          activeBorderColor:
+#            - '#8839ef'
+#            - bold
+#          inactiveBorderColor:
+#            - '#6c6f85'
+#          optionsTextColor:
+#            - '#1e66f5'
+#          selectedLineBgColor:
+#            - '#ccd0da'
+#          cherryPickedCommitBgColor:
+#            - '#bcc0cc'
+#          cherryPickedCommitFgColor:
+#            - '#8839ef'
+#          unstagedChangesColor:
+#            - '#d20f39'
+#          defaultFgColor:
+#            - '#4c4f69'
+#          searchingActiveBorderColor:
+#            - '#df8e1d'
+#   
+#      authorColors:
+#        '*': '#7287fd'
 # END LIGHT THEME
 
 os:
