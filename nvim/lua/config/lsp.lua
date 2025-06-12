@@ -4,7 +4,6 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls",
     "bashls",
-    "volar",
     "terraformls",
     "intelephense",
     "pyright",
@@ -38,20 +37,6 @@ require("mason-lspconfig").setup({
             }
           }
         }
-      })
-    end,
-    -- this is broken because JS...
-    -- :MasonInstall vue-language-server@2.0.19
-    -- @see: https://github.com/williamboman/mason-lspconfig.nvim/issues/371#issuecomment-2185401809
-    ["volar"] = function()
-      require("lspconfig").volar.setup({
-        capabilities = require("blink.cmp").get_lsp_capabilities(),
-        filetypes = { "javascript", "vue", "json" },
-        init_options = {
-          vue = {
-            hybridMode = false,
-          },
-        },
       })
     end,
   },
@@ -113,7 +98,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       -- Fallback: Open the :%s command for manual renaming
       local current_word = vim.fn.expand("<cword>")
       local command = ":%s/\\<" .. current_word .. "\\>//g<Left><Left>"
-       -- from_part = true, do_lt = false, special = true
+      -- from_part = true, do_lt = false, special = true
       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(command, true, false, true), "n", false)
     end, { silent = true, noremap = true, desc = "LSP rename or fallback to :%s" })
   end,
