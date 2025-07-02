@@ -29,6 +29,7 @@ config.font = wezterm.font_with_fallback {
 }
 config.font_size = 16
 config.line_height = 1.3
+config.warn_about_missing_glyphs = false
 
 config.command_palette_font_size = config.font_size
 
