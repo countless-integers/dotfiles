@@ -1,0 +1,13 @@
+gui:
+  returnImmediately: true
+customCommands:
+  containers:
+    - name: bash
+      attach: true
+      command: 'docker exec -it {{ .Container.ID }} bash'
+      serviceNames: []
+  images:
+    - name: bash
+      attach: true
+      command: 'docker run --rm -it {{ .Image.ID }} bash'
+      serviceNames: []
