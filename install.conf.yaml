@@ -12,7 +12,9 @@
     ~/.tmux.conf:
       if: 'command -v tmux >/dev/null 2>&1'
       path: tmux/tmux.conf
-    ~/.vimrc: vim/vimrc
+    ~/.vimrc: 
+      if: 'command -v vim >/dev/null 2>&1'
+      path: vim/vimrc
     ~/.ideavimrc: vim/ideavimrc
     ~/.config/nvim/:
       if: 'command -v nvim >/dev/null 2>&1'
@@ -93,7 +95,12 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
-    - ["vim +PlugUpdate +PlugClean! +qa", Installing and updating plugins]
+    - description: Install/Update VIM plugins
+      command: |
+        if ! command -v vim &>/dev/null; then
+          exit 0
+        fi
+        vim +PlugUpdate +PlugClean! +qa
     - description: "Clone or update the Tmux Plugin Manager"
       command: |
         if ! command -v tmux &>/dev/null; then
