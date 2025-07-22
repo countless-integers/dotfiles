@@ -89,10 +89,14 @@ return {
     { "<leader>sC",      function() Snacks.picker.commands() end,                                         desc = "Commands" },
     { "<leader>sj",      function() Snacks.picker.jumps() end,                                            desc = "Jumps" },
     { "<leader>sR",      function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
+    { "<leader>fR",      function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
+    { "<leader>r",       function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
+    -- Buffers
+    { "<leader>bb",      function() Snacks.picker.buffers() end,                                          desc = "Search buffers", },
+    { "<leader>bd",      function() Snacks.bufdelete() end,                                               desc = "Delete buffer", },
     -- Scratch buffer
     { "<leader>.",       function() Snacks.scratch() end,                                                 desc = "Toggle Scratch Buffer", },
     { "<leader>S",       function() Snacks.scratch.select() end,                                          desc = "Select Scratch Buffer", },
-    { "<leader>bd",      function() Snacks.bufdelete() end,                                               desc = "Delete Buffer", },
     -- { "<leader>cR", function() Snacks.rename.rename_file() end,      desc = "Rename File", },
     -- git
     { "<leader>gB",      function() Snacks.gitbrowse() end,                                               desc = "Git Browse", },
