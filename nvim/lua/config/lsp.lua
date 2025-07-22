@@ -81,13 +81,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
     end
 
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-    vim.keymap.set({ "n", "v" }, "<leader>cf", vim.lsp.buf.format, {})
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show docs" })
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references"})
+    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action"})
+    vim.keymap.set({ "n", "v" }, "<leader>cf", vim.lsp.buf.format, { desc = "Code format"})
     -- vim.keymap.set({ "n", "v" }, "<leader>cr", vim.lsp.buf.rename, {})
-
     vim.keymap.set("n", "<leader>cr", function()
       -- Check if any attached LSP supports rename
       for _, lsp_client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
