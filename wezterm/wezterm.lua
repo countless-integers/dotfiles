@@ -18,7 +18,8 @@ local function scheme_for_appearance(appearance)
     return 'Catppuccin Macchiato'
   end
   -- return 'Catppuccin Latte'
-  return 'Gruvbox Light'
+  -- return 'Gruvbox Light'
+  return 'rose-pine-dawn'
 end
 
 config.color_scheme = scheme_for_appearance(get_appearance())
