@@ -107,6 +107,30 @@ return {
     -- terminal
     { "<c-/>",           function() Snacks.terminal() end,                                                mode = { "n", "t" },                   desc = "Toggle Terminal", },
     { "<c-_>",           function() Snacks.terminal() end,                                                desc = "which_key_ignore", },
+    {
+      "<leader><c-R>",
+      function()
+        if vim.fn.executable("serpl") ~= 1 then
+          return vim.notify("serpl is not installed or not in $PATH", vim.log.levels.WARN, { title = "Serpl" })
+        end
+        local root = vim.fn.getcwd()
+        local word = vim.fn.expand("<cword>") or ""
+        Snacks.terminal({ "serpl", "--project-root", root }, {
+          cwd = root,
+          win = { position = "float" },
+        })
+        -- after the float grabs focus, send keys to its job
+        vim.defer_fn(function()
+          local bufnr = vim.api.nvim_get_current_buf()
+          local job = vim.b[bufnr] and vim.b[bufnr].terminal_job_id
+          if job and word ~= "" then
+            vim.fn.chansend(job, word .. "\t")
+            vim.fn.chansend(job, word)
+          end
+        end, 120)
+      end,
+      desc = "Serpl (project, float)",
+    },
     -- various
     { "]]",              function() Snacks.words.jump(vim.v.count1) end,                                  desc = "Next Reference",               mode = { "n", "t" }, },
     { "[[",              function() Snacks.words.jump(-vim.v.count1) end,                                 desc = "Prev Reference",               mode = { "n", "t" }, },
