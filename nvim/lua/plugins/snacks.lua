@@ -1,3 +1,4 @@
+---@module 'snacks'
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -38,7 +39,32 @@ return {
       enabled = true,
       timeout = 3000,
     },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      -- work-around for less agressive filepath truncating from this GH issue:
+      -- @see: https://github.com/folke/snacks.nvim/issues/1217#issuecomment-2661465574
+      actions = {
+        calculate_file_truncate_width = function(self)
+          local width = self.list.win:size().width
+          self.opts.formatters.file.truncate = width - 6
+        end,
+      },
+      win = {
+        list = {
+          on_buf = function(self)
+            self:execute 'calculate_file_truncate_width'
+          end,
+        },
+        preview = {
+          on_buf = function(self)
+            self:execute 'calculate_file_truncate_width'
+          end,
+          on_close = function(self)
+            self:execute 'calculate_file_truncate_width'
+          end,
+        },
+      },
+    },
     quickfile = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = {
@@ -132,13 +158,13 @@ return {
       desc = "Serpl (project, float)",
     },
     -- various
-    { "]]",              function() Snacks.words.jump(vim.v.count1) end,                                  desc = "Next Reference",               mode = { "n", "t" }, },
-    { "[[",              function() Snacks.words.jump(-vim.v.count1) end,                                 desc = "Prev Reference",               mode = { "n", "t" }, },
-    { "<leader>N",       function() Snacks.notifier.show_history() end,                                   desc = "Notification History", },
-    { "<leader>un",      function() Snacks.notifier.hide() end,                                           desc = "Dismiss All Notifications", },
+    { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",            mode = { "n", "t" }, },
+    { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",            mode = { "n", "t" }, },
+    { "<leader>N",  function() Snacks.notifier.show_history() end,   desc = "Notification History", },
+    { "<leader>un", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications", },
     -- zen mode
-    { "<leader>z",       function() Snacks.zen() end,                                                     desc = "Toggle Zen Mode", },
-    { "<leader>Z",       function() Snacks.zen.zoom() end,                                                desc = "Toggle Zoom", },
+    { "<leader>z",  function() Snacks.zen() end,                     desc = "Toggle Zen Mode", },
+    { "<leader>Z",  function() Snacks.zen.zoom() end,                desc = "Toggle Zoom", },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
