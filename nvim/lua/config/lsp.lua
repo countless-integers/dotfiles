@@ -43,7 +43,8 @@ require("mason-lspconfig").setup({
   },
 })
 
--- none ls
+-- it's none ls, but still name as the original package
+require("null-ls").setup({})
 require("mason-null-ls").setup({
   automatic_installation = false,
   ensure_installed = {
@@ -60,12 +61,8 @@ require("mason-null-ls").setup({
     completion = false,
     hover = false,
   },
-  handlers = nil,
-})
-require("null-ls").setup({
-  sources = {
-    -- Anything not supported by mason.
-  },
+  -- automated setup, supposedly
+  handlers = {},
 })
 
 -- bindings and the like

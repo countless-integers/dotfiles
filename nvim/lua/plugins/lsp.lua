@@ -12,6 +12,8 @@ return {
     "jay-babu/mason-null-ls.nvim",
     dependencies = {
       "nvimtools/none-ls.nvim",
+      -- not really listed as dep, but none fails without it
+      "nvim-lua/plenary.nvim",
     },
     event = { "BufReadPre", "BufNewFile" },
   },
