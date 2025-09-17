@@ -19,12 +19,14 @@ local function scheme_for_appearance(appearance)
   end
   -- return 'Catppuccin Latte'
   -- return 'Gruvbox Light'
-  return 'rose-pine-dawn'
+  -- return 'rose-pine-dawn'
+  return 'dayfox'
 end
 
 config.color_scheme = scheme_for_appearance(get_appearance())
 config.hide_tab_bar_if_only_one_tab = true
 config.font = wezterm.font_with_fallback {
+  "FiraCode Nerd Font",
   "JetBrainsMono Nerd Font Mono",
   "JetBrains Mono",
 }
@@ -45,6 +47,14 @@ config.skip_close_confirmation_for_processes_named = {
   'zsh',
   'tmux',
   'nu',
+}
+
+config.keys = {
+  {
+    key = 'f',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.QuickSelect,
+  },
 }
 
 return config
