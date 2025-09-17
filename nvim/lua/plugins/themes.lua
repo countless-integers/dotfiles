@@ -13,6 +13,7 @@ return {
     "rose-pine/neovim",
     name = "rose-pine",
   },
+  { "EdenEast/nightfox.nvim" },
   {
     "f-person/auto-dark-mode.nvim",
     opts = {
@@ -22,7 +23,8 @@ return {
       set_light_mode = function()
         vim.o.background = "light"
         -- vim.cmd.colorscheme "gruvbox"
-        vim.cmd.colorscheme "rose-pine"
+        -- vim.cmd.colorscheme "rose-pine"
+        vim.cmd.colorscheme "dayfox"
       end,
       update_interval = 3000,
       fallback = "dark"
