@@ -92,6 +92,10 @@
       create: true
       glob: true
       path: zellij/*
+    ~/.config/mpv/:
+      create: true
+      glob: true
+      path: mpv/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
@@ -175,3 +179,12 @@
       quiet: true
       stderr: true
       stdout: true
+    - description: "Install oh-my-zsh"
+      stdout: true
+      command: |
+        if [ ! -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
+          echo "oh-my-zsh detected. Skipping..."
+          echo "You can install it with:"
+          echo 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+        fi
+
