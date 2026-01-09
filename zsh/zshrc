@@ -212,3 +212,5 @@ if command -v lazygit >/dev/null 2>&1; then
   alias lazygit='CONFIG_DIR="$HOME/.config/lazygit" lazygit'
   alias lg=lazygit
 fi
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
