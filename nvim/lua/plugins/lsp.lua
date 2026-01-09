@@ -34,7 +34,7 @@ return {
   },
   {
     'mrcjkb/rustaceanvim',
-    version = '^5',
+    version = '^7',
     lazy = false,
   },
   {
