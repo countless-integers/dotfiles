@@ -46,4 +46,15 @@ return {
       vim.keymap.set('n', '<leader>te', ":w<CR>:lua require('ansible').run()<CR>", { desc = "Run Ansible playbook", buffer = true })
     end,
   },
+  {
+    "adibhanna/laravel.nvim",
+    dependencies = {
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+    },
+    keys = {},
+    config = function()
+        require("laravel").setup()
+    end,
+}
 }
