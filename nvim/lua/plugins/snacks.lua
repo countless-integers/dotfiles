@@ -117,6 +117,10 @@ return {
     { "<leader>sR",      function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
     { "<leader>fR",      function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
     { "<leader>r",       function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
+    { "<leader>gi",      function() Snacks.picker.gh_issue() end,                                         desc = "GitHub Issues (open)" },
+    { "<leader>gI",      function() Snacks.picker.gh_issue({ state = "all" }) end,                        desc = "GitHub Issues (all)" },
+    { "<leader>gp",      function() Snacks.picker.gh_pr() end,                                            desc = "GitHub Pull Requests (open)" },
+    { "<leader>gP",      function() Snacks.picker.gh_pr({ state = "all" }) end,                           desc = "GitHub Pull Requests (all)" },
     -- Buffers
     { "<leader>bb",      function() Snacks.picker.buffers() end,                                          desc = "Search buffers", },
     { "<leader>bd",      function() Snacks.bufdelete() end,                                               desc = "Delete buffer", },
