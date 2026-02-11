@@ -77,7 +77,6 @@ plugins=(
   httpie
   git
   python
-  pyenv
   sudo
   vscode
   web-search
@@ -167,17 +166,10 @@ else
   %{$fg_bold[cyan]%}❯%{$reset_color%} '
 fi
 
-if command -v pyenv >/dev/null 2>&1; then
-  export PATH="$HOME/.pyenv/bin:$PATH"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
 if command -v cargo >/dev/null 2>&1; then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 export PATH="./vendor/bin:${HOME}/.composer/vendor/bin:${HOME}/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-
-export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible/vault_pass
 
 alias tf=terraform
 alias art=php artisan
