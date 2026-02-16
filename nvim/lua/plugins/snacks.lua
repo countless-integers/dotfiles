@@ -89,8 +89,8 @@ return {
     },
   },
   keys = {
-    -- Pickers : find (file)
     { "<leader><space>", function() Snacks.picker.smart() end,                                            desc = "Smart Find Files" },
+    -- Pickers : find (file)
     { "<leader>fb",      function() Snacks.picker.buffers() end,                                          desc = "Buffers" },
     { "<leader>fd",      function() Snacks.picker.files({ cwd = vim.fn.expand("~") .. "/dotfiles" }) end, desc = "Find Config File" },
     { "<leader>ff",      function() Snacks.picker.files() end,                                            desc = "Find Files" },
@@ -104,6 +104,8 @@ return {
     { "gr",              function() Snacks.picker.lsp_references() end,                                   nowait = true,                         desc = "References" },
     { "gI",              function() Snacks.picker.lsp_implementations() end,                              desc = "Goto Implementation" },
     { "gy",              function() Snacks.picker.lsp_type_definitions() end,                             desc = "Goto T[y]pe Definition" },
+    { "gai",             function() Snacks.picker.lsp_incoming_calls() end,                               desc = "C[a]lls Incoming" },
+    { "gao",             function() Snacks.picker.lsp_outgoing_calls() end,                               desc = "C[a]lls Outgoing" },
     { "<leader>ss",      function() Snacks.picker.lsp_symbols() end,                                      desc = "LSP Symbols" },
     { "<leader>sS",      function() Snacks.picker.lsp_workspace_symbols() end,                            desc = "LSP Workspace Symbols" },
     -- Pickers : Other
@@ -114,13 +116,10 @@ return {
     { "<leader>s:",      function() Snacks.picker.command_history() end,                                  desc = "Command History" },
     { "<leader>sC",      function() Snacks.picker.commands() end,                                         desc = "Commands" },
     { "<leader>sj",      function() Snacks.picker.jumps() end,                                            desc = "Jumps" },
+    { "<leader>sk",      function() Snacks.picker.keymaps() end,                                          desc = "Keymaps" },
     { "<leader>sR",      function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
     { "<leader>fR",      function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
     { "<leader>r",       function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
-    { "<leader>gi",      function() Snacks.picker.gh_issue() end,                                         desc = "GitHub Issues (open)" },
-    { "<leader>gI",      function() Snacks.picker.gh_issue({ state = "all" }) end,                        desc = "GitHub Issues (all)" },
-    { "<leader>gp",      function() Snacks.picker.gh_pr() end,                                            desc = "GitHub Pull Requests (open)" },
-    { "<leader>gP",      function() Snacks.picker.gh_pr({ state = "all" }) end,                           desc = "GitHub Pull Requests (all)" },
     -- Buffers
     { "<leader>bb",      function() Snacks.picker.buffers() end,                                          desc = "Search buffers", },
     { "<leader>bd",      function() Snacks.bufdelete() end,                                               desc = "Delete buffer", },
@@ -134,6 +133,11 @@ return {
     { "<leader>gf",      function() Snacks.lazygit.log_file() end,                                        desc = "Lazygit Current File History", },
     { "<leader>gg",      function() Snacks.lazygit() end,                                                 desc = "Lazygit", },
     { "<leader>gl",      function() Snacks.lazygit.log() end,                                             desc = "Lazygit Log (cwd)", },
+    -- gh
+    { "<leader>gi",      function() Snacks.picker.gh_issue() end,                                         desc = "GitHub Issues (open)" },
+    { "<leader>gI",      function() Snacks.picker.gh_issue({ state = "all" }) end,                        desc = "GitHub Issues (all)" },
+    { "<leader>gp",      function() Snacks.picker.gh_pr() end,                                            desc = "GitHub Pull Requests (open)" },
+    { "<leader>gP",      function() Snacks.picker.gh_pr({ state = "all" }) end,                           desc = "GitHub Pull Requests (all)" },
     -- terminal
     { "<c-/>",           function() Snacks.terminal() end,                                                mode = { "n", "t" },                   desc = "Toggle Terminal", },
     { "<c-_>",           function() Snacks.terminal() end,                                                desc = "which_key_ignore", },
