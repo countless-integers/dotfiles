@@ -23,6 +23,12 @@ require("mason-lspconfig").setup({
         capabilities = require("blink.cmp").get_lsp_capabilities(),
       })
     end,
+    ["terraformls"] = function()
+      require("lspconfig").terraformls.setup({
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+        filetypes = { "terraform", "terraform-vars", "hcl" },
+      })
+    end,
     ["ruff"] = function()
       require("lspconfig").ruff.setup({
         init_options = {
