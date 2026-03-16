@@ -19,6 +19,7 @@ local languages = {
 	-- data
 	"yaml",
 	"json",
+	"ini",
 	-- fe
 	"javascript",
 	"html",
@@ -39,13 +40,26 @@ vim.filetype.add({
 			local sub_ext = base:match("%.([^.]+)$")
 
 			if sub_ext then
-				-- jinja2 parser doesn't seem to exist so use jinja
-				return sub_ext .. ".jinja"
+				-- Return a custom filetype like sh_jinja so treesitter injections work
+				return sub_ext .. "_jinja"
 			end
 			return "jinja"
 		end,
 	},
 })
+
+-- Map *_jinja filetypes to the jinja parser.
+-- Queries are still looked up under "jinja" (see after/queries/jinja/injections.scm).
+vim.treesitter.language.register("jinja", "sh_jinja")
+vim.treesitter.language.register("jinja", "yaml_jinja")
+vim.treesitter.language.register("jinja", "ini_jinja")
+vim.treesitter.language.register("jinja", "json_jinja")
+
+-- Custom predicate used in after/queries/jinja/injections.scm to inject the
+-- host language (bash, yaml, ini) only for buffers with the matching filetype.
+vim.treesitter.query.add_predicate("is-filetype?", function(match, pattern, bufnr, pred)
+	return vim.bo[bufnr].filetype == pred[2]
+end, { force = true })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = languages,
@@ -65,5 +79,28 @@ vim.api.nvim_create_autocmd("FileType", {
 			-- Fallback to standard Vim regex highlighting/indenting
 			vim.bo.indentexpr = ""
 		end
+	end,
+})
+
+-- Enable treesitter for custom *_jinja filetypes (jinja + host language injections)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "sh_jinja", "yaml_jinja", "ini_jinja", "json_jinja" },
+	callback = function(args)
+		local bufnr = args.buf
+		-- Schedule to run after all other FileType autocmds settle.
+		vim.schedule(function()
+			if not vim.api.nvim_buf_is_valid(bufnr) then
+				return
+			end
+			-- Explicitly pass "jinja" — language.register maps *_jinja to jinja,
+			-- but passing it directly avoids relying on that resolution at start time.
+			local ok, err = pcall(vim.treesitter.start, bufnr, "jinja")
+			if ok then
+				vim.wo.foldmethod = "expr"
+				vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			else
+				vim.notify("treesitter: failed to start jinja for " .. vim.bo[bufnr].filetype .. ": " .. tostring(err), vim.log.levels.WARN)
+			end
+		end)
 	end,
 })

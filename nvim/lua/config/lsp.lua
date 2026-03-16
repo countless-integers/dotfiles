@@ -1,6 +1,45 @@
 require("mason").setup()
+
+-- vim.lsp.config() calls must happen BEFORE mason-lspconfig.setup() so that
+-- when automatic_enable calls vim.lsp.enable(), the FileType autocmds are
+-- registered with the correct (extended) filetype lists.
+local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+vim.lsp.config("bashls", {
+  capabilities = capabilities,
+  filetypes = { "sh", "bash", "sh_jinja" },
+})
+
+vim.lsp.config("terraformls", {
+  capabilities = capabilities,
+  filetypes = { "terraform", "terraform-vars", "hcl" },
+})
+
+vim.lsp.config("ansiblels", {
+  capabilities = capabilities,
+})
+
+vim.lsp.config("jinja_lsp", {
+  capabilities = capabilities,
+  filetypes = { "jinja", "sh_jinja", "yaml_jinja", "ini_jinja", "json_jinja" },
+})
+
+-- Direct autocmd for sh_jinja → bashls.
+-- vim.lsp.config/enable may not register FileType autocmds for unknown filetypes
+-- reliably, so this ensures bashls always attaches to .sh.j2 files.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "sh_jinja",
+  callback = function(args)
+    vim.lsp.start({
+      name = "bashls",
+      cmd = { "bash-language-server", "start" },
+      root_dir = vim.fs.root(args.buf, { ".git" }) or vim.fn.expand("%:p:h"),
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
+    }, { bufnr = args.buf })
+  end,
+})
+
 require("mason-lspconfig").setup({
-  automatic_installation = false,
   ensure_installed = {
     "lua_ls",
     "bashls",
@@ -9,43 +48,8 @@ require("mason-lspconfig").setup({
     "pyright",
     --"ruff",
     "marksman",
-  },
-  handlers = {
-    function(server_name) -- default handler (optional)
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      require("lspconfig")[server_name].setup({
-        capabilities = capabilities,
-      })
-    end,
-    ["lua_ls"] = function()
-      local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({
-        capabilities = require("blink.cmp").get_lsp_capabilities(),
-      })
-    end,
-    ["terraformls"] = function()
-      require("lspconfig").terraformls.setup({
-        capabilities = require("blink.cmp").get_lsp_capabilities(),
-        filetypes = { "terraform", "terraform-vars", "hcl" },
-      })
-    end,
-    ["ruff"] = function()
-      require("lspconfig").ruff.setup({
-        init_options = {
-          settings = {
-            lineLength = 30,
-            fixAll = true,
-            showSyntaxErrors = true,
-            organizeImports = true,
-            codeAction = {
-              fixViolation = {
-                enable = true
-              }
-            }
-          }
-        }
-      })
-    end,
+    "ansiblels",
+    "jinja_lsp",
   },
 })
 
@@ -69,6 +73,17 @@ require("mason-null-ls").setup({
   },
   -- automated setup, supposedly
   handlers = {},
+})
+
+-- Disable bashls diagnostics on Jinja templates — the Jinja syntax ({{ }}, {% %})
+-- is always flagged as invalid bash, making diagnostics useless for these files.
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == "bashls" and vim.bo[args.buf].filetype == "sh_jinja" then
+      vim.diagnostic.enable(false, { bufnr = args.buf })
+    end
+  end,
 })
 
 -- bindings and the like
