@@ -1,6 +1,34 @@
 #!/usr/bin/env bash
 
-MODE=$1
+detect_theme() {
+  case "$(uname -s)" in
+    Darwin)
+      defaults read -g AppleInterfaceStyle 2>/dev/null | grep -qi dark && echo dark || echo light
+      ;;
+    Linux)
+      if command -v gsettings &>/dev/null; then
+        scheme=$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)
+        [[ "$scheme" == *"dark"* ]] && echo dark || echo light
+      elif command -v kreadconfig5 &>/dev/null; then
+        scheme=$(kreadconfig5 --file kdeglobals --group General --key ColorScheme 2>/dev/null)
+        [[ "${scheme,,}" == *"dark"* ]] && echo dark || echo light
+      else
+        echo dark
+      fi
+      ;;
+    *)
+      echo dark
+      ;;
+  esac
+}
+
+if [[ -n "$1" ]]; then
+  MODE="$1"
+else
+  MODE=$(detect_theme)
+  echo "Auto-detected theme: $MODE"
+fi
+
 if [[ "$MODE" != "dark" && "$MODE" != "light" ]]; then
   echo "Usage: $0 [dark|light]"
   exit 1

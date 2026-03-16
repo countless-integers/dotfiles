@@ -13,8 +13,6 @@ if [[ ! -f "$FILE" ]]; then
   exit 1
 fi
 
-echo "Working on $FILE..."
-
 awk -v c_start="$COMMENT_BLOCK_START" -v c_end="$COMMENT_BLOCK_END" \
     -v u_start="$UNCOMMENT_BLOCK_START" -v u_end="$UNCOMMENT_BLOCK_END" \
     -v comment_char="$COMMENT_CHAR" '
@@ -48,11 +46,11 @@ awk -v c_start="$COMMENT_BLOCK_START" -v c_end="$COMMENT_BLOCK_END" \
 
     if (in_comment_block) {
       # Comment if not already commented
-      if ($0 ~ "^\\s*" comment_char) print
+      if ($0 ~ "^" comment_char " ") print
       else print comment_char " " $0
     } else if (in_uncomment_block) {
       # Uncomment if already commented
-      sub("^\\s*" comment_char "\\s?", "")
+      sub("^" comment_char "[[:space:]]?", "")
       print
     } else {
       print
@@ -60,4 +58,3 @@ awk -v c_start="$COMMENT_BLOCK_START" -v c_end="$COMMENT_BLOCK_END" \
   }
 ' "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
 
-echo "✔ Switched $UNCOMMENT_BLOCK_START to $COMMENT_BLOCK_START"
