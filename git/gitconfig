@@ -50,3 +50,5 @@
     process = git-lfs filter-process
 [rebase]
 	updateRefs = true
+[init]
+	defaultBranch = main
