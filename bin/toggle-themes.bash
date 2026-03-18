@@ -44,6 +44,26 @@ fi
 
 LG_CONFIG="$HOME/dotfiles/lazygit/config.yml"
 STARSHIP_CONFIG="$HOME/dotfiles/starship/starship.toml"
+TMUX_THEME_DIR="$HOME/dotfiles/tmux"
 
+echo "Working on $LG_CONFIG..."
 toggle-comment-blocks.bash "$LG_CONFIG" "$COMMENT_BLOCK" "$UNCOMMENT_BLOCK"
+echo "✔ $UNCOMMENT_BLOCK applied in $LG_CONFIG"
+
+echo "Working on $STARSHIP_CONFIG..."
 toggle-comment-blocks.bash "$STARSHIP_CONFIG" "$COMMENT_BLOCK" "$UNCOMMENT_BLOCK"
+echo "✔ $UNCOMMENT_BLOCK applied in $STARSHIP_CONFIG"
+
+echo "Working on $TMUX_THEME_DIR/theme.conf..."
+ln -sf "$TMUX_THEME_DIR/theme-${MODE}.conf" "$TMUX_THEME_DIR/theme.conf"
+if tmux info &>/dev/null; then
+  CATPPUCCIN_FLAVOR=$([[ "$MODE" == "dark" ]] && echo "macchiato" || echo "latte")
+  CATPPUCCIN_PLUGIN=~/.tmux/plugins/tmux
+  # Unset all cached catppuccin and theme options so everything re-applies cleanly
+  tmux show-options -g | awk '/^@thm_|^@catppuccin_/{print $1}' | xargs -I{} tmux set -gu {}
+  tmux set -g @catppuccin_flavor "$CATPPUCCIN_FLAVOR"
+  tmux source "$HOME/dotfiles/tmux/catppuccin-options.conf"
+  tmux source "$CATPPUCCIN_PLUGIN/catppuccin_options_tmux.conf"
+  tmux source "$CATPPUCCIN_PLUGIN/catppuccin_tmux.conf"
+fi
+echo "✔ ${UNCOMMENT_BLOCK} applied in $TMUX_THEME_DIR/theme.conf"
