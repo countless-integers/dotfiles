@@ -2,18 +2,12 @@ return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
 	opts = {
-		-- add any options here
+		-- disabled because using snacks for messages and notifications
+		messages = { enabled = false },
+		notify = { enabled = false },
 	},
 	dependencies = {
 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 		"MunifTanjim/nui.nvim",
-	},
-	messages = {
-		-- disabled because using snacks
-		enabled = false,
-	},
-	notify = {
-		-- disabled because using snacks
-		enabled = false,
 	},
 }
