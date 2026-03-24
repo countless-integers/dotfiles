@@ -35,7 +35,7 @@ return {
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^7",
-		lazy = false,
+		ft = "rust",
 	},
 	{
 		"mfussenegger/nvim-ansible",
@@ -53,11 +53,11 @@ return {
 	},
 	{
 		"adibhanna/laravel.nvim",
+		ft = "php",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",
 		},
-		keys = {},
 		config = function()
 			require("laravel").setup()
 		end,
