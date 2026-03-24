@@ -3,4 +3,5 @@ return {
   "echasnovski/mini.bracketed",
   "echasnovski/mini.pairs",
   "echasnovski/mini.surround",
+  "echasnovski/mini.trailspace",
 }
