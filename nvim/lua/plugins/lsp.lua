@@ -17,9 +17,6 @@ return {
 		},
 		event = { "BufReadPre", "BufNewFile" },
 	},
-	{
-		"JoosepAlviste/nvim-ts-context-commentstring",
-	},
 	-- specific for neovim lua dev
 	{
 		"folke/lazydev.nvim",
