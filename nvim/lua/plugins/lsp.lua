@@ -9,13 +9,32 @@ return {
 		"neovim/nvim-lspconfig",
 	},
 	{
-		"jay-babu/mason-null-ls.nvim",
-		dependencies = {
-			"nvimtools/none-ls.nvim",
-			-- not really listed as dep, but none fails without it
-			"nvim-lua/plenary.nvim",
-		},
+		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			formatters_by_ft = {
+				lua    = { "stylua" },
+				json   = { "jq" },
+				python = { "ruff_format" },
+			},
+		},
+	},
+	{
+		"mfussenegger/nvim-lint",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			local lint = require("lint")
+			lint.linters_by_ft = {
+				sh     = { "shellcheck" },
+				bash   = { "shellcheck" },
+				python = { "ruff" },
+			}
+			vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+				callback = function()
+					lint.try_lint()
+				end,
+			})
+		end,
 	},
 	-- specific for neovim lua dev
 	{

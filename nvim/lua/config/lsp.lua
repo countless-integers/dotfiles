@@ -53,27 +53,27 @@ require("mason-lspconfig").setup({
   },
 })
 
--- it's none ls, but still name as the original package
-require("null-ls").setup({})
-require("mason-null-ls").setup({
-  automatic_installation = false,
-  ensure_installed = {
-    "stylua",
-    "jq",
-    "shellcheck", -- for bash
-    "codelldb",
-    "ruff",
-  },
-  methods = {
-    diagnostics = true,
-    formatting = true,
-    code_actions = true,
-    completion = false,
-    hover = false,
-  },
-  -- automated setup, supposedly
-  handlers = {},
-})
+-- Auto-install formatters, linters, and DAP adapters via Mason,
+-- but only if they're not already available locally.
+-- (codelldb is a DAP adapter, the rest are formatters/linters for conform+nvim-lint)
+local registry = require("mason-registry")
+local ensure = {
+  { mason = "stylua",     cmd = "stylua" },
+  { mason = "jq",         cmd = "jq" },
+  { mason = "shellcheck", cmd = "shellcheck" },
+  { mason = "ruff",       cmd = "ruff" },
+  { mason = "codelldb",   cmd = "codelldb" },
+}
+registry.refresh(function()
+  for _, tool in ipairs(ensure) do
+    if vim.fn.executable(tool.cmd) == 0 then
+      local ok, pkg = pcall(registry.get_package, tool.mason)
+      if ok then
+        pkg:install()
+      end
+    end
+  end
+end)
 
 -- Disable bashls diagnostics on Jinja templates — the Jinja syntax ({{ }}, {% %})
 -- is always flagged as invalid bash, making diagnostics useless for these files.
@@ -85,6 +85,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+-- Format via conform (with LSP fallback for filetypes not covered by conform)
+vim.keymap.set({ "n", "v" }, "<leader>cf", function()
+  require("conform").format({ async = true, lsp_fallback = true })
+end, { desc = "Code format" })
 
 -- bindings and the like
 -- @see: :h vim.lsp.buf
@@ -103,7 +108,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
     vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references"})
     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action"})
-    vim.keymap.set({ "n", "v" }, "<leader>cf", vim.lsp.buf.format, { desc = "Code format"})
     -- vim.keymap.set({ "n", "v" }, "<leader>cr", vim.lsp.buf.rename, {})
     vim.keymap.set("n", "<leader>cr", function()
       -- Check if any attached LSP supports rename
