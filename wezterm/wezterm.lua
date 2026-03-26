@@ -24,7 +24,6 @@ local function scheme_for_appearance(appearance)
 end
 
 config.color_scheme = scheme_for_appearance(get_appearance())
-config.hide_tab_bar_if_only_one_tab = true
 config.font = wezterm.font_with_fallback {
   "FiraCode Nerd Font",
   "JetBrainsMono Nerd Font Mono",
@@ -33,6 +32,7 @@ config.font = wezterm.font_with_fallback {
 config.font_size = 16
 config.line_height = 1.3
 config.warn_about_missing_glyphs = false
+config.adjust_window_size_when_changing_font_size = false
 
 config.command_palette_font_size = config.font_size
 
