@@ -128,6 +128,7 @@ return {
     { "<leader>S",       function() Snacks.scratch.select() end,                                          desc = "Select Scratch Buffer", },
     -- { "<leader>cR", function() Snacks.rename.rename_file() end,      desc = "Rename File", },
     -- git
+    { "<leader>gs",      function() Snacks.picker.git_status() end,                                        desc = "Git Status (changed files)" },
     { "<leader>gB",      function() Snacks.gitbrowse() end,                                               desc = "Git Browse", },
     { "<leader>gb",      function() Snacks.git.blame_line() end,                                          desc = "Git Blame Line", },
     { "<leader>gf",      function() Snacks.lazygit.log_file() end,                                        desc = "Lazygit Current File History", },
