@@ -15,6 +15,9 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true })
 
 -- Plugins configs
 require("config.lazy")
+
+-- Built-in opt-in plugins (after lazy, so its module loader sees the paths)
+vim.cmd.packadd("nvim.undotree")
 require("config.themes")
 require("config.file-navigation")
 require("config.tree-sitter")
