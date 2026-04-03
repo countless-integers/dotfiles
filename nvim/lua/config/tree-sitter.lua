@@ -67,9 +67,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		local ft = vim.bo[args.buf].filetype
 
 		-- Check if a treesitter parser is actually available for this filetype
-		local has_parser, _ = pcall(vim.treesitter.get_parser, args.buf)
-
-		if has_parser then
+		if vim.treesitter.get_parser(args.buf) then
 			vim.treesitter.start()
 			vim.wo.foldmethod = "expr"
 			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"

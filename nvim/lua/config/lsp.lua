@@ -97,10 +97,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.supports_method("textDocument/completion") then
+    if client and client:supports_method("textDocument/completion") then
       vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
     end
-    if client and client.supports_method("textDocument/definition") then
+    if client and client:supports_method("textDocument/definition") then
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
     end
 
@@ -112,7 +112,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>cr", function()
       -- Check if any attached LSP supports rename
       for _, lsp_client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-        if lsp_client.supports_method("textDocument/rename") then
+        if lsp_client:supports_method("textDocument/rename") then
           return vim.lsp.buf.rename()
         end
       end
