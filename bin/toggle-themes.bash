@@ -42,9 +42,16 @@ else
   UNCOMMENT_BLOCK="LIGHT THEME"
 fi
 
+ATUIN_CONFIG="$HOME/dotfiles/atuin/config.toml"
 LG_CONFIG="$HOME/dotfiles/lazygit/config.yml"
 STARSHIP_CONFIG="$HOME/dotfiles/starship/starship.toml"
 TMUX_THEME_DIR="$HOME/dotfiles/tmux"
+
+if command -v atuin &>/dev/null && [[ -f "$ATUIN_CONFIG" ]]; then
+  ATUIN_THEME=$([[ "$MODE" == "dark" ]] && echo "catppuccin-macchiato" || echo "catppuccin-latte")
+  sed -i'' -e "s/^name = \"catppuccin-.*\"/name = \"$ATUIN_THEME\"/" "$ATUIN_CONFIG"
+  echo "✔ Atuin theme set to $ATUIN_THEME"
+fi
 
 echo "Working on $LG_CONFIG..."
 toggle-comment-blocks.bash "$LG_CONFIG" "$COMMENT_BLOCK" "$UNCOMMENT_BLOCK"
