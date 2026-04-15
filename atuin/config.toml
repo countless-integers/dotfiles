@@ -46,7 +46,7 @@
 
 ## With workspace filtering enabled, Atuin will filter for commands executed
 ## in any directory within a git repository tree (default: false)
-# workspaces = false
+workspaces = true
 
 ## which filter mode to use when atuin is invoked from a shell up-key binding
 ## the accepted values are identical to those of "filter_mode"
@@ -176,37 +176,39 @@ name = "catppuccin-macchiato"
 
 [stats]
 ## Set commands where we should consider the subcommand for statistics. Eg, kubectl get vs just kubectl
-# common_subcommands = [
-#   "apt",
-#   "cargo",
-#   "composer",
-#   "dnf",
-#   "docker",
-#   "git",
-#   "go",
-#   "ip",
-#   "kubectl",
-#   "nix",
-#   "nmcli",
-#   "npm",
-#   "pecl",
-#   "pnpm",
-#   "podman",
-#   "port",
-#   "systemctl",
-#   "tmux",
-#   "yarn",
-# ]
+common_subcommands = [
+  "apt",
+  "artisan",
+  "cargo",
+  "composer",
+  "dnf",
+  "docker",
+  "git",
+  "go",
+  "ip",
+  "kubectl",
+  "nix",
+  "nmcli",
+  "npm",
+  "pecl",
+  "pnpm",
+  "podman",
+  "port",
+  "systemctl",
+  "tmux",
+  "yarn",
+]
 
 ## Set commands that should be totally stripped and ignored from stats
 # common_prefix = ["sudo"]
 
 ## Set commands that will be completely ignored from stats
-# ignored_commands = [
+ignored_commands = [
+    "pwd",
 #   "cd",
 #   "ls",
 #   "vi"
-# ]
+]
 
 [keys]
 # Defaults to true. If disabled, using the up/down key won't exit the TUI when scrolled past the first/last entry.
