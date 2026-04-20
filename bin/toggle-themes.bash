@@ -49,7 +49,7 @@ TMUX_THEME_DIR="$HOME/dotfiles/tmux"
 
 if command -v atuin &>/dev/null && [[ -f "$ATUIN_CONFIG" ]]; then
   ATUIN_THEME=$([[ "$MODE" == "dark" ]] && echo "catppuccin-macchiato" || echo "catppuccin-latte")
-  sed -i'' -e "s/^name = \"catppuccin-.*\"/name = \"$ATUIN_THEME\"/" "$ATUIN_CONFIG"
+  sed "s/^name = \"catppuccin-.*\"/name = \"$ATUIN_THEME\"/" "$ATUIN_CONFIG" > "$ATUIN_CONFIG.tmp" && mv "$ATUIN_CONFIG.tmp" "$ATUIN_CONFIG"
   echo "✔ Atuin theme set to $ATUIN_THEME"
 fi
 
