@@ -22,7 +22,14 @@ return {
       -- C-k: Toggle signature help (if signature.enabled = true)
       --
       -- See :h blink-cmp-config-keymap for defining your own keymap
-      keymap = { preset = "default" },
+      keymap = {
+        preset = "default",
+        ["<C-n>"] = { "show", "select_next", "fallback" },
+        ["<C-d>"] = { function(cmp) return cmp.select_next({ count = 5 }) end },
+        ["<C-u>"] = { function(cmp) return cmp.select_prev({ count = 5 }) end },
+        ["<C-j>"] = { function(cmp) return cmp.select_next({ jump_by = "kind" }) end },
+        ["<C-k>"] = { function(cmp) return cmp.select_prev({ jump_by = "kind" }) end, "show_signature", "hide_signature", "fallback" },
+      },
 
       -- (Default) Only show the documentation popup when manually triggered
       completion = { documentation = { auto_show = false } },
