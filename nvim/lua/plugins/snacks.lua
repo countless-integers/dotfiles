@@ -98,6 +98,8 @@ return {
     { "<leader>fr",      function() Snacks.picker.recent() end,                                           desc = "Recent" },
     -- Pickers : grep
     { "<leader>fg",      function() Snacks.picker.grep() end,                                             desc = "Grep" },
+    { "<leader>fx",      function() Snacks.picker.diagnostics() end,                                      desc = "Diagnostics" },
+    { "<leader>fX",      function() Snacks.picker.diagnostics({ filter = { buf = 0 } }) end,              desc = "Buffer Diagnostics" },
     -- Pickers : LSP
     { "gd",              function() Snacks.picker.lsp_definitions() end,                                  desc = "Goto Definition" },
     { "gD",              function() Snacks.picker.lsp_declarations() end,                                 desc = "Goto Declaration" },
