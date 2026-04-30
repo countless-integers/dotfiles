@@ -124,6 +124,22 @@ return {
     { "<leader>r",       function() Snacks.picker.resume() end,                                           desc = "Resume last picker" },
     -- Buffers
     { "<leader>bb",      function() Snacks.picker.buffers() end,                                          desc = "Search buffers", },
+    {
+      "<A-Tab>",
+      function()
+        Snacks.picker.buffers({
+          win = {
+            input = {
+              keys = {
+                ["<A-Tab>"] = { "list_down", mode = { "i", "n" } },
+                ["<A-S-Tab>"] = { "list_up", mode = { "i", "n" } },
+              },
+            },
+          },
+        })
+      end,
+      desc = "Buffer switcher",
+    },
     { "<leader>bd",      function() Snacks.bufdelete() end,                                               desc = "Delete buffer", },
     -- Scratch buffer
     { "<leader>.",       function() Snacks.scratch() end,                                                 desc = "Toggle Scratch Buffer", },
