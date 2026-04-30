@@ -7,6 +7,8 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.rnu = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.cmdheight = 0
+require('vim._core.ui2').enable()
 
 -- exit terminal without closing,
 -- similar to how going back from insert to normal mode in a buffer works
