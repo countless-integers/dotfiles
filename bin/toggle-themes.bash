@@ -43,6 +43,7 @@ else
 fi
 
 ATUIN_CONFIG="$HOME/dotfiles/atuin/config.toml"
+BAT_CONFIG="$HOME/dotfiles/bat/config"
 LG_CONFIG="$HOME/dotfiles/lazygit/config.yml"
 STARSHIP_CONFIG="$HOME/dotfiles/starship/starship.toml"
 TMUX_THEME_DIR="$HOME/dotfiles/tmux"
@@ -51,6 +52,11 @@ if command -v atuin &>/dev/null && [[ -f "$ATUIN_CONFIG" ]]; then
   ATUIN_THEME=$([[ "$MODE" == "dark" ]] && echo "catppuccin-macchiato" || echo "catppuccin-latte")
   sed "s/^name = \"catppuccin-.*\"/name = \"$ATUIN_THEME\"/" "$ATUIN_CONFIG" > "$ATUIN_CONFIG.tmp" && mv "$ATUIN_CONFIG.tmp" "$ATUIN_CONFIG"
   echo "✔ Atuin theme set to $ATUIN_THEME"
+fi
+
+if command -v bat &>/dev/null && [[ -f "$BAT_CONFIG" ]]; then
+  sed "s/^--theme[[:space:]].*/--theme $MODE/" "$BAT_CONFIG" > "$BAT_CONFIG.tmp" && mv "$BAT_CONFIG.tmp" "$BAT_CONFIG"
+  echo "✔ Bat theme set to $MODE"
 fi
 
 echo "Working on $LG_CONFIG..."
