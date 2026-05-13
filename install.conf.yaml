@@ -12,7 +12,7 @@
     ~/.tmux.conf:
       if: 'command -v tmux >/dev/null 2>&1'
       path: tmux/tmux.conf
-    ~/.vimrc: 
+    ~/.vimrc:
       if: 'command -v vim >/dev/null 2>&1'
       path: vim/vimrc
     ~/.ideavimrc: vim/ideavimrc
