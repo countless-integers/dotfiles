@@ -133,6 +133,14 @@
       quiet: true
       stderr: true
       stdout: true
+    - description: "Install Yazi flavors/plugins from package.toml"
+      command: |
+        if command -v ya &>/dev/null && [[ -f "$HOME/.config/yazi/package.toml" ]]; then
+          ya pkg install
+        fi
+      quiet: true
+      stderr: true
+      stdout: true
     - description: "Clone or update the zsh-syntax-highlighting plugin for zsh"
       command: |
         REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"

@@ -47,6 +47,7 @@ BAT_CONFIG="$HOME/dotfiles/bat/config"
 LG_CONFIG="$HOME/dotfiles/lazygit/config.yml"
 STARSHIP_CONFIG="$HOME/dotfiles/starship/starship.toml"
 TMUX_THEME_DIR="$HOME/dotfiles/tmux"
+YAZI_CONFIG="$HOME/dotfiles/yazi/theme.toml"
 
 if command -v atuin &>/dev/null && [[ -f "$ATUIN_CONFIG" ]]; then
   ATUIN_THEME=$([[ "$MODE" == "dark" ]] && echo "catppuccin-macchiato" || echo "catppuccin-latte")
@@ -57,6 +58,16 @@ fi
 if command -v bat &>/dev/null && [[ -f "$BAT_CONFIG" ]]; then
   sed "s/^--theme[[:space:]].*/--theme $MODE/" "$BAT_CONFIG" > "$BAT_CONFIG.tmp" && mv "$BAT_CONFIG.tmp" "$BAT_CONFIG"
   echo "✔ Bat theme set to $MODE"
+fi
+
+if command -v yazi &>/dev/null && [[ -f "$YAZI_CONFIG" ]]; then
+  YAZI_FLAVOR=$([[ "$MODE" == "dark" ]] && echo "catppuccin-macchiato" || echo "catppuccin-latte")
+  # Pin both dark and light to the same flavor so yazi can't pick wrong via OSC 11
+  # (tmux caches the outer terminal's bg color at startup and never refreshes it).
+  sed -e "s/^dark .*= \".*\"/dark  = \"$YAZI_FLAVOR\"/" \
+      -e "s/^light.*= \".*\"/light = \"$YAZI_FLAVOR\"/" \
+      "$YAZI_CONFIG" > "$YAZI_CONFIG.tmp" && mv "$YAZI_CONFIG.tmp" "$YAZI_CONFIG"
+  echo "✔ Yazi flavor set to $YAZI_FLAVOR"
 fi
 
 echo "Working on $LG_CONFIG..."
