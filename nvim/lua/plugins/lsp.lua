@@ -50,7 +50,7 @@ return {
 	},
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^8",
+		version = "^9",
 		ft = "rust",
 	},
 	{
