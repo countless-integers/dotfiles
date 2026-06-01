@@ -63,6 +63,7 @@ local ensure = {
   { mason = "shellcheck", cmd = "shellcheck" },
   { mason = "ruff",       cmd = "ruff" },
   { mason = "codelldb",   cmd = "codelldb" },
+  { mason = "prettier",   cmd = "prettier" },
 }
 registry.refresh(function()
   for _, tool in ipairs(ensure) do

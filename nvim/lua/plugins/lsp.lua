@@ -13,9 +13,11 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			formatters_by_ft = {
-				lua    = { "stylua" },
-				json   = { "jq" },
-				python = { "ruff_format" },
+				lua              = { "stylua" },
+				json             = { "jq" },
+				python           = { "ruff_format" },
+				yaml             = { "prettier" },
+				["yaml.ansible"] = { "prettier" },
 			},
 		},
 	},
