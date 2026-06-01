@@ -140,6 +140,7 @@ export PATH="${HOME}/.composer/vendor/bin:${HOME}/bin:/usr/local/bin:/usr/local/
 
 alias tf=terraform
 alias art='php artisan'
+alias gcd='cd $(git rev-parse --show-toplevel)'
 
 # @see: https://github.com/BurntSushi/ripgrep/issues/1373#issuecomment-753659388
 if command -v rg >/dev/null 2>&1; then
