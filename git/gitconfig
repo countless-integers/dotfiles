@@ -29,6 +29,7 @@
     root = rev-parse --show-toplevel
 [push]
     default = simple
+    useForceIfIncludes = true
 [pull]
     rebase = true
 [color]
