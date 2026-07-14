@@ -29,7 +29,12 @@ config.font = wezterm.font_with_fallback {
   "JetBrainsMono Nerd Font Mono",
   "JetBrains Mono",
 }
-config.font_size = 16
+-- macOS
+local font_size = 16
+if wezterm.target_triple:find 'linux' then
+  font_size = 13
+end
+config.font_size = font_size
 config.line_height = 1.3
 config.warn_about_missing_glyphs = false
 config.adjust_window_size_when_changing_font_size = false
