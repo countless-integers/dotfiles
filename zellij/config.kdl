@@ -1,6 +1,24 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Alt h" "Alt left"  { MoveFocusOrTab "left"; }
+        bind "Alt l" "Alt right" { MoveFocusOrTab "right"; }
+        bind "Alt j" "Alt down"  { MoveFocus "down"; }
+        bind "Alt k" "Alt up"    { MoveFocus "up"; }
+        bind "Alt n" { NewPane; }
+        bind "Alt x" { ToggleFloatingPanes; }
+        // autolock: manually unlock and stop autolock re-locking this pane
+        bind "Alt z" {
+            MessagePlugin "autolock" { payload "disable"; }
+            SwitchToMode "normal";
+        }
+    }
+    normal {
+        // autolock: re-assess lock state immediately after running a command
+        bind "Enter" {
+            WriteChars "\u{000D}";
+            MessagePlugin "autolock" {};
+        }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -133,13 +151,24 @@ keybinds clear-defaults=true {
             SwitchToMode "normal"
         }
     }
+    shared {
+        // autolock: re-enable automatic locking (after an Alt z disable)
+        bind "Alt Shift z" {
+            MessagePlugin "autolock" { payload "enable"; }
+        }
+    }
     shared_except "locked" {
+        // autolock: manually lock now and stop autolock unlocking
+        bind "Alt z" {
+            MessagePlugin "autolock" { payload "disable"; }
+            SwitchToMode "locked";
+        }
         bind "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt =" { Resize "Increase"; }
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
-        bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt x" { ToggleFloatingPanes; }
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Alt i" { MoveTab "left"; }
         bind "Alt n" { NewPane; }
@@ -167,6 +196,7 @@ keybinds clear-defaults=true {
     }
     shared_except "locked" "scroll" "search" {
         bind "Ctrl s" { SwitchToMode "scroll"; }
+        bind "Ctrl f" { ToggleFocusFullscreen; }
     }
     shared_except "locked" "tab" {
         bind "Ctrl t" { SwitchToMode "tab"; }
@@ -247,6 +277,12 @@ keybinds clear-defaults=true {
 // Plugin aliases - can be used to change the implementation of Zellij
 // changing these requires a restart to take effect
 plugins {
+    autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
+        is_enabled true
+        triggers "nvim|vim|git|fzf|zoxide|atuin|lazygit"
+        reaction_seconds "0.3"
+        print_to_log false
+    }
     about location="zellij:about"
     compact-bar location="zellij:compact-bar"
     configuration location="zellij:configuration"
@@ -267,6 +303,7 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    autolock
 }
  
 // Use a simplified UI without special fonts (arrow glyphs)
