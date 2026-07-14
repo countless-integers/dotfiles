@@ -115,6 +115,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
     vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references"})
     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action"})
+    vim.keymap.set("n", "<leader>cA", function()
+      local last = vim.api.nvim_buf_line_count(0)
+      local last_col = #(vim.api.nvim_buf_get_lines(0, last - 1, last, true)[1] or "")
+      vim.lsp.buf.code_action({
+        range = { start = { 1, 0 }, ["end"] = { last, last_col } },
+      })
+    end, { desc = "Code action (whole file)" })
     -- vim.keymap.set({ "n", "v" }, "<leader>cr", vim.lsp.buf.rename, {})
     vim.keymap.set("n", "<leader>cr", function()
       -- Check if any attached LSP supports rename
