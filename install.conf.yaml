@@ -87,6 +87,10 @@
       create: true
       glob: true
       path: ghostty/*
+    ~/.config/ghostty/local.conf:
+      if: '[ `uname` = Linux ]'
+      create: true
+      path: ghostty/config.linux
     ~/.config/zellij/:
       if: 'command -v zellij >/dev/null 2>&1'
       create: true

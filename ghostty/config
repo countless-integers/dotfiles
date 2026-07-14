@@ -12,8 +12,13 @@ font-size = 16
 adjust-cell-height = 20
 window-padding-x = 2
 window-padding-y = 2
-
-theme = dark:catppuccin-mocha,light:catppuccin-latte
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 background-opacity = 0.95
 
+macos-option-as-alt = left
+macos-titlebar-style = hidden
+
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+# Optional machine-local overrides (per-OS font-size, etc.), deployed by dotbot
+config-file = ?~/.config/ghostty/local.conf
