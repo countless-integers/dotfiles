@@ -156,6 +156,8 @@ keybinds clear-defaults=true {
         bind "Alt Shift z" {
             MessagePlugin "autolock" { payload "enable"; }
         }
+        // toggle fullscreen from any mode, incl. locked (e.g. an nvim pane)
+        bind "Alt f" { ToggleFocusFullscreen; }
     }
     shared_except "locked" {
         // autolock: manually lock now and stop autolock unlocking
