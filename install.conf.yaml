@@ -145,6 +145,18 @@
       quiet: true
       stderr: true
       stdout: true
+    - description: "Download the zellij-autolock plugin"
+      command: |
+        if command -v zellij &>/dev/null; then
+          PLUGIN_DIR="$HOME/.config/zellij/plugins"
+          PLUGIN_PATH="$PLUGIN_DIR/zellij-autolock.wasm"
+          PLUGIN_URL="https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm"
+          mkdir -p "$PLUGIN_DIR"
+          curl -fsSL -o "$PLUGIN_PATH" "$PLUGIN_URL"
+        fi
+      quiet: true
+      stderr: true
+      stdout: true
     - description: "Clone or update the zsh-syntax-highlighting plugin for zsh"
       command: |
         REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
