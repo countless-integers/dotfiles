@@ -115,6 +115,10 @@
       create: true
       glob: true
       path: hyprland/mako/*
+    ~/.config/MangoHud/:
+      create: true
+      glob: true
+      path: mango-hud/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
