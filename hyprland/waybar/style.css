@@ -1,0 +1,47 @@
+/* Waybar — Catppuccin Mocha (https://github.com/catppuccin/catppuccin) */
+* {
+  font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font", sans-serif;
+  font-size: 13px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: #1e1e2e; /* base */
+  color: #cdd6f4;      /* text */
+}
+
+#workspaces button {
+  padding: 0 8px;
+  color: #a6adc8;      /* subtext0 */
+  background: transparent;
+}
+#workspaces button.active {
+  color: #1e1e2e;      /* base */
+  background: #cba6f7; /* mauve */
+  border-radius: 6px;
+}
+#workspaces button.urgent {
+  color: #1e1e2e;
+  background: #f38ba8; /* red */
+  border-radius: 6px;
+}
+
+#window { color: #a6adc8; }
+
+#clock,
+#wireplumber,
+#network,
+#battery,
+#tray {
+  padding: 0 10px;
+}
+
+#clock      { color: #89b4fa; } /* blue */
+#wireplumber { color: #f9e2af; } /* yellow */
+#network    { color: #a6e3a1; } /* green */
+#battery    { color: #fab387; } /* peach */
+
+#battery.warning  { color: #f9e2af; } /* yellow */
+#battery.critical { color: #f38ba8; } /* red */

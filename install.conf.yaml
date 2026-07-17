@@ -100,6 +100,21 @@
       create: true
       glob: true
       path: mpv/*
+    ~/.config/hypr/:
+      if: 'command -v hyprctl >/dev/null 2>&1'
+      create: true
+      glob: true
+      path: hyprland/hypr/*
+    ~/.config/waybar/:
+      if: 'command -v waybar >/dev/null 2>&1'
+      create: true
+      glob: true
+      path: hyprland/waybar/*
+    ~/.config/mako/:
+      if: 'command -v mako >/dev/null 2>&1'
+      create: true
+      glob: true
+      path: hyprland/mako/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
