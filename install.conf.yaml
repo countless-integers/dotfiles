@@ -176,6 +176,19 @@
       quiet: true
       stderr: true
       stdout: true
+    - description: "Download the hypr-binds keybind cheatsheet (wofi)"
+      command: |
+        if command -v hyprctl &>/dev/null; then
+          BIN_DIR="$HOME/bin"
+          BIN_PATH="$BIN_DIR/hypr-binds-wofi.sh"
+          BIN_URL="https://github.com/hyprland-community/hypr-binds/releases/download/v0.0.1/hypr-binds-wofi.sh"
+          mkdir -p "$BIN_DIR"
+          curl -fsSL -o "$BIN_PATH" "$BIN_URL"
+          chmod +x "$BIN_PATH"
+        fi
+      quiet: true
+      stderr: true
+      stdout: true
     - description: "Clone or update the zsh-syntax-highlighting plugin for zsh"
       command: |
         REPO_PATH="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"

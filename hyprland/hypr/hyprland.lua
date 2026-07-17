@@ -61,55 +61,57 @@ hl.config({
 })
 
 -- Keybinds — https://wiki.hypr.land/Configuring/Basics/Binds/
+-- The `description` on each bind powers the SUPER+/ cheatsheet (hypr-binds + wofi).
 local mod = "SUPER"
 
 -- launch
-hl.bind(mod .. " + Return", hl.dsp.exec_cmd(terminal))
-hl.bind(mod .. " + B",      hl.dsp.exec_cmd(browser))
-hl.bind(mod .. " + R",      hl.dsp.exec_cmd(launcher))
+hl.bind(mod .. " + Return", hl.dsp.exec_cmd(terminal),                     { description = "Terminal" })
+hl.bind(mod .. " + B",      hl.dsp.exec_cmd(browser),                      { description = "Browser" })
+hl.bind(mod .. " + R",      hl.dsp.exec_cmd(launcher),                     { description = "App launcher" })
+hl.bind(mod .. " + slash",  hl.dsp.exec_cmd("$HOME/bin/hypr-binds-wofi.sh"), { description = "Show keybinds" })
 
 -- window management
-hl.bind(mod .. " + Q",      hl.dsp.window.close())
-hl.bind(mod .. " + V",      hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mod .. " + F",      hl.dsp.window.fullscreen())
-hl.bind(mod .. " + T",      hl.dsp.layout("togglesplit")) -- dwindle
-hl.bind(mod .. " + Escape", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mod .. " + SHIFT + Q", hl.dsp.exit())
+hl.bind(mod .. " + Q",         hl.dsp.window.close(),                       { description = "Close window" })
+hl.bind(mod .. " + V",         hl.dsp.window.float({ action = "toggle" }),  { description = "Toggle floating" })
+hl.bind(mod .. " + F",         hl.dsp.window.fullscreen(),                  { description = "Fullscreen" })
+hl.bind(mod .. " + T",         hl.dsp.layout("togglesplit"),                { description = "Toggle split (dwindle)" })
+hl.bind(mod .. " + Escape",    hl.dsp.exec_cmd("hyprlock"),                 { description = "Lock screen" })
+hl.bind(mod .. " + SHIFT + Q", hl.dsp.exit(),                              { description = "Exit Hyprland" })
 
 -- focus (vim keys)
-hl.bind(mod .. " + h", hl.dsp.focus({ direction = "left" }))
-hl.bind(mod .. " + j", hl.dsp.focus({ direction = "down" }))
-hl.bind(mod .. " + k", hl.dsp.focus({ direction = "up" }))
-hl.bind(mod .. " + l", hl.dsp.focus({ direction = "right" }))
+hl.bind(mod .. " + h", hl.dsp.focus({ direction = "left" }),  { description = "Focus left" })
+hl.bind(mod .. " + j", hl.dsp.focus({ direction = "down" }),  { description = "Focus down" })
+hl.bind(mod .. " + k", hl.dsp.focus({ direction = "up" }),    { description = "Focus up" })
+hl.bind(mod .. " + l", hl.dsp.focus({ direction = "right" }), { description = "Focus right" })
 
 -- move window (vim keys)
-hl.bind(mod .. " + SHIFT + h", hl.dsp.window.move({ direction = "left" }))
-hl.bind(mod .. " + SHIFT + j", hl.dsp.window.move({ direction = "down" }))
-hl.bind(mod .. " + SHIFT + k", hl.dsp.window.move({ direction = "up" }))
-hl.bind(mod .. " + SHIFT + l", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mod .. " + SHIFT + h", hl.dsp.window.move({ direction = "left" }),  { description = "Move window left" })
+hl.bind(mod .. " + SHIFT + j", hl.dsp.window.move({ direction = "down" }),  { description = "Move window down" })
+hl.bind(mod .. " + SHIFT + k", hl.dsp.window.move({ direction = "up" }),    { description = "Move window up" })
+hl.bind(mod .. " + SHIFT + l", hl.dsp.window.move({ direction = "right" }), { description = "Move window right" })
 
 -- workspaces: SUPER+[0-9] focus, SUPER+SHIFT+[0-9] move active window
 for i = 1, 10 do
     local key = i % 10 -- 10 -> key 0
-    hl.bind(mod .. " + " .. key,         hl.dsp.focus({ workspace = i }))
-    hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+    hl.bind(mod .. " + " .. key,         hl.dsp.focus({ workspace = i }),       { description = "Workspace " .. i })
+    hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), { description = "Move to workspace " .. i })
 end
 
 -- scratchpad
-hl.bind(mod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mod .. " + S",         hl.dsp.workspace.toggle_special("magic"),           { description = "Scratchpad" })
+hl.bind(mod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }), { description = "Move to scratchpad" })
 
 -- mouse drag / resize
-hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
-hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true, description = "Drag window" })
+hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Resize window" })
 
 -- screenshots (needs grim, slurp, wl-clipboard)
-hl.bind("Print",         hl.dsp.exec_cmd("grim - | wl-copy"))
-hl.bind(mod .. " + Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
+hl.bind("Print",           hl.dsp.exec_cmd("grim - | wl-copy"),               { description = "Screenshot (full)" })
+hl.bind(mod .. " + Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'), { description = "Screenshot (region)" })
 
 -- media & brightness keys (needs wireplumber, brightnessctl)
-hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
-hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true })
-hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true, description = "Volume up" })
+hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true, description = "Volume down" })
+hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, description = "Mute" })
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true, description = "Brightness up" })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true, description = "Brightness down" })
