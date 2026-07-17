@@ -3,10 +3,12 @@
 -- Palette: Catppuccin Mocha — https://github.com/catppuccin/catppuccin
 
 -- Monitors — https://wiki.hypr.land/Configuring/Basics/Monitors/
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1.2 })
 
 -- Programs
-local terminal = "wezterm"
+-- cannot get wezterm to work otherwise :(
+-- local terminal = "wezterm --config enable_wayland=false start --always-new-process"
+local terminal = "ghostty"
 local browser  = "firefox"
 local launcher = "hyprlauncher"
 
