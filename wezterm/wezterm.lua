@@ -54,6 +54,9 @@ config.skip_close_confirmation_for_processes_named = {
   'nu',
 }
 
+-- Supposedly helps with passthrough for "exotic" key combos like shift-enter...
+config.enable_kitty_keyboard = true
+
 config.keys = {
   {
     key = 'f',
