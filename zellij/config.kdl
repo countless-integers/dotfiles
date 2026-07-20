@@ -8,7 +8,7 @@ keybinds clear-defaults=true {
         bind "Alt n" { NewPane; }
         bind "Alt x" { ToggleFloatingPanes; }
         // autolock: manually unlock and stop autolock re-locking this pane
-        bind "Alt z" {
+        bind "Alt g" {
             MessagePlugin "autolock" { payload "disable"; }
             SwitchToMode "normal";
         }
@@ -152,16 +152,16 @@ keybinds clear-defaults=true {
         }
     }
     shared {
-        // autolock: re-enable automatic locking (after an Alt z disable)
-        bind "Alt Shift z" {
+        // autolock: re-enable automatic locking (after an Alt g disable)
+        bind "Alt Shift g" {
             MessagePlugin "autolock" { payload "enable"; }
         }
         // toggle fullscreen from any mode, incl. locked (e.g. an nvim pane)
-        bind "Alt f" { ToggleFocusFullscreen; }
+        bind "Alt z" { ToggleFocusFullscreen; }
     }
     shared_except "locked" {
         // autolock: manually lock now and stop autolock unlocking
-        bind "Alt z" {
+        bind "Alt g" {
             MessagePlugin "autolock" { payload "disable"; }
             SwitchToMode "locked";
         }
