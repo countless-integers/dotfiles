@@ -17,6 +17,7 @@
 ._*
 .Spotlight-V100
 .Trashes
+
 .jira-url
 .gtm/
 .vscode/
@@ -32,3 +33,7 @@ _ide_helper.php
 cachegrind.out*
 
 AGENTS.md
+CLAUDE.md
+**/.claude/settings.local.json
+/docs/
+/notes/
