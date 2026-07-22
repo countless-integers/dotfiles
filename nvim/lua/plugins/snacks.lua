@@ -50,7 +50,16 @@ return {
         end,
       },
       win = {
+        input = {
+          keys = {
+            -- this is an alias to avoid conflict with zellij's <a-h>
+            ["<a-.>"] = { "toggle_hidden", mode = { "i", "n" } },
+          },
+        },
         list = {
+          keys = {
+            ["<a-.>"] = "toggle_hidden",
+          },
           on_buf = function(self)
             self:execute 'calculate_file_truncate_width'
           end,
